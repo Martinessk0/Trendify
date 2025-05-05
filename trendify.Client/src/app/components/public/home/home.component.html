@@ -1,0 +1,31 @@
+<section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Discover Your Style</h1>
+      <p>Explore curated collections handpicked just for you.</p>
+      <a href="/shop" class="btn btn-light btn-lg">Start Shopping</a>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class="products container">
+    <h2 class="text-center mb-5">Featured Products</h2>
+    <div class="row g-4">
+      <div class="col-md-4" *>
+        <div class="card h-100">
+          <img src="https://source.unsplash.com/featured/300x200?shoes" class="card-img-top" alt="Product">
+          <div class="card-body">
+            <h5 class="card-title">Stylish Sneaker</h5>
+            <p class="card-text">Comfort meets fashion in our latest release.</p>
+            <p class="fw-bold">$79.99</p>
+            <a href="/product/1" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+      @for (item of products; track $index) {
+        <div class="col-md-4">
+          <app-product [product]="item"></app-product>
+        </div>
+      }
+    </div>
+  </section>

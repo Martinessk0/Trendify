@@ -1,0 +1,37 @@
+
+$theme-colors: (
+  "primary":  #FF8C66,
+  "secondary":#FFC199,
+  "success":  #4CAF50,
+  "info":     #17A2B8,
+  "warning":  #FFC107,
+  "danger":   #DC3545,
+  "light":    #FFF8F0,
+  "dark":     #333333
+);
+
+// Body defaults
+$body-bg:    #FFF8F0 !default;
+$body-color: #1A1A1A !default;
+
+// Font stack
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
+// Navbar collapse breakpoint
+$navbar-expand: lg !default;
+
+// 2) Import Bootstrap’s full SCSS
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css"; 
+
+// 3) Global tweaks
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  &:hover { text-decoration: none; }
+}
+
+

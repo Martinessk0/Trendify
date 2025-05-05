@@ -1,0 +1,17 @@
+// 1) Core Sass utilities
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";      // ← define $theme-colors-rgb
+@import "bootstrap/scss/mixins";
+
+// 2) Root CSS-variable declarations
+@import "bootstrap/scss/root";
+
+// 3) Bootstrap components (only the ones you need)
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/grid";
+// …etc.
+
+// 4) Utilities (bg-, text-, borders, shadows…)
+@import "bootstrap/scss/utilities";

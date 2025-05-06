@@ -6,17 +6,13 @@
         <div class="card-body text-center">
 
           <!-- Colored circle avatar with initial -->
-          <div
-            class="mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center"
-            style="width: 120px; height: 120px; background-color: #0d6efd; color: #fff; font-size: 3rem;"
-          >
+          <div class="avatar bg-primary text-white mx-auto mb-3 d-flex align-items-center justify-content-center">
             {{ user?.fullName?.charAt(0) }}
           </div>
 
           <!-- User name and email -->
           <h4 class="card-title mb-1">{{ user?.fullName }}</h4>
           <p class="text-muted mb-4">{{ user?.email }}</p>
-
 
           <!-- Roles badges -->
           <div class="mt-4">

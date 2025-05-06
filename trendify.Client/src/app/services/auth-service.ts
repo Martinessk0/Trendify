@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { map, Observable } from "rxjs";
 import { LoginModel } from "../models/account/login-model";
 import { AuthResponseModel } from "../models/account/auth-response-model";
+import { ProfileModel } from "../models/account/profile-model";
 
 @Injectable({
     providedIn: 'root',
@@ -30,19 +31,23 @@ export class AuthService {
             );
     }
 
-    getUserDetail = () => {
-        const token = this.getToken();
-        if (!token) return undefined;
-        const decodedToken: any = jwtDecode(token);
-        const userDetail = {
-            id: decodedToken.nameid,
-            fullName: decodedToken.name,
-            email: decodedToken.email,
-            roles: decodedToken.role || [],
-        };
+    // getUserDetail = () => {
+    //     const token = this.getToken();
+    //     if (!token) return undefined;
+    //     const decodedToken: any = jwtDecode(token);
+    //     const userDetail = {
+    //         id: decodedToken.nameid,
+    //         fullName: decodedToken.name,
+    //         email: decodedToken.email,
+    //         roles: decodedToken.role || [],
+    //     };
 
-        return userDetail;
-    };
+    //     return userDetail;
+    // };
+
+    getProfile(): Observable<ProfileModel> {
+        return this.http.get<ProfileModel>(`${this.apiUrl}/account/detail`);
+    }
 
     public isLoggedIn(): boolean {
         const token = this.getToken();

@@ -4,14 +4,7 @@ import { environment } from '../../../../../environments/environment';
 import { AuthService } from '../../../../services/auth-service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
-export interface UserProfile {
-  id: string;
-  fullName: string;
-  email: string;
-  roles: string[];
-}
-
+import { ProfileModel } from '../../../../models/account/profile-model';
 
 
 @Component({
@@ -21,14 +14,16 @@ export interface UserProfile {
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
-  user?: UserProfile;
+  user?: ProfileModel;
 
   constructor(public authService: AuthService,
     public router: Router,
   ) { }
 
   ngOnInit(): void {
-    this.user = this.authService.getUserDetail();
+    this.authService.getProfile().subscribe(profile => {
+      this.user = profile;
+    });
   }
 
   logout() {

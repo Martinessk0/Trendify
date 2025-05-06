@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LayoutComponent } from '../components/public/layout/layout.component';
 import { HomeComponent } from '../components/public/home/home.component';
 import { ProfileComponent } from '../components/public/account/profile/profile.component';
+import { LoginComponent } from '../components/public/account/login/login.component';
 
 export const publicRoutes: Routes = [
   {
@@ -16,6 +17,10 @@ export const publicRoutes: Routes = [
       {
         path: 'home-page',
         component: HomeComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
       },
       {
         path: 'profile',

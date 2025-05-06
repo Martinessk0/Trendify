@@ -19,7 +19,7 @@ export class AuthService {
 
     login(data: LoginModel): Observable<AuthResponseModel> {
         return this.http
-            .post<AuthResponseModel>(`${this.apiUrl}account/login`, data)
+            .post<AuthResponseModel>(`${this.apiUrl}/account/login`, data)
             .pipe(
                 map((response) => {
                     if (response.isSuccess) {
@@ -32,7 +32,7 @@ export class AuthService {
 
     getUserDetail = () => {
         const token = this.getToken();
-        if (!token) return null;
+        if (!token) return undefined;
         const decodedToken: any = jwtDecode(token);
         const userDetail = {
             id: decodedToken.nameid,
@@ -44,25 +44,27 @@ export class AuthService {
         return userDetail;
     };
 
-    isLoggedIn = (): boolean => {
+    public isLoggedIn(): boolean {
         const token = this.getToken();
-        if (!token) return false;
-        return !this.isTokenExpired();
-    };
-
-    private isTokenExpired() {
-        const token = this.getToken();
-        if (!token) return true;
-        const decoded = jwtDecode(token);
-        const isTokenExpired = Date.now() >= decoded['exp']! * 1000;
-        if (isTokenExpired) this.logout();
-        return isTokenExpired;
+        return token != null && !this.isTokenExpired();
     }
 
-    logout = (): void => {
-        localStorage.removeItem(this.tokenKey);
-    };
+    private isTokenExpired(): boolean {
+        const token = this.getToken();
+        if (!token) return true;
+        const decoded: any = jwtDecode(token);
+        const expired = Date.now() >= decoded.exp * 1000;
+        if (expired) {
+            this.logout();
+        }
+        return expired;
+    }
 
-    getToken = (): string | null =>
-        localStorage.getItem(this.tokenKey) || '';
+    public logout(): void {
+        localStorage.removeItem(this.tokenKey);
+    }
+
+    public getToken(): string | null {
+        return localStorage.getItem(this.tokenKey);
+    }
 }

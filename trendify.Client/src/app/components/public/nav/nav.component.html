@@ -29,7 +29,7 @@
 
     <!-- Search / Cart / Avatar -->
     <form class="d-flex align-items-center">
-
+      @if (isLoggedIn()) {
       <a href="#" class="position-relative me-3 text-white">
         <i class="bi bi-cart" style="font-size: 1.25rem;"></i>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -39,16 +39,19 @@
 
 
       <div class="dropdown">
-        <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"> 
-        </button>-->
-        <img src="assets/images/avatar.png" class="dropdown-toggle rounded-circle" alt="User avatar" id="dropdownImg" role="button" width="32" height="32"
-          data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="assets/images/avatar.png" class="dropdown-toggle rounded-circle" alt="User avatar" id="dropdownImg"
+          role="button" width="32" height="32" data-bs-toggle="dropdown" aria-expanded="false">
         <ul class="dropdown-menu dropdown-menu-end">
           <li><a class="dropdown-item" href="/profile">Profile</a></li>
           <li><a class="dropdown-item" href="#">Orders</a></li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
+          <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
         </ul>
       </div>
+      }
+      @else {
+      <a href="/login">Login</a>
+      }
+
       <!-- <a href="#">
         <img src="assets/images/avatar.png" alt="User avatar" class="rounded-circle" width="32" height="32">
       </a> -->

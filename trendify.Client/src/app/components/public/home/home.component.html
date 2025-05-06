@@ -1,31 +1,24 @@
-<section class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>Discover Your Style</h1>
-      <p>Explore curated collections handpicked just for you.</p>
-      <a href="/shop" class="btn btn-light btn-lg">Start Shopping</a>
-    </div>
-  </section>
+<section class="hero-section d-flex flex-column justify-content-center align-items-center text-white text-center">
+  <div class="container px-3">
+    <h1 class="display-4 fw-bold mb-3">Discover Your Style</h1>
+    <p class="lead mb-4">Explore curated collections handpicked just for you.</p>
+    <a href="/shop" class="btn btn-light btn-lg rounded-pill px-4">Start Shopping</a>
+  </div>
+</section>
 
-  <!-- Products Section -->
-  <section class="products container">
-    <h2 class="text-center mb-5">Featured Products</h2>
-    <div class="row g-4">
-      <div class="col-md-4" *>
-        <div class="card h-100">
-          <img src="https://source.unsplash.com/featured/300x200?shoes" class="card-img-top" alt="Product">
-          <div class="card-body">
-            <h5 class="card-title">Stylish Sneaker</h5>
-            <p class="card-text">Comfort meets fashion in our latest release.</p>
-            <p class="fw-bold">$79.99</p>
-            <a href="/product/1" class="btn btn-primary">View Details</a>
-          </div>
-        </div>
+
+
+<!-- Products Section -->
+<section class="products container py-5">
+  <h2 class="text-center mb-5">Featured Products</h2>
+  <div class="row g-4">
+    @for (item of products; track $index) {
+      <div class="col-md-4">
+        <app-product [product]="item"></app-product>
       </div>
-      @for (item of products; track $index) {
-        <div class="col-md-4">
-          <app-product [product]="item"></app-product>
-        </div>
-      }
-    </div>
-  </section>
+    }
+  </div>
+</section>
+
+
+

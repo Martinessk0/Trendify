@@ -2,16 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
-
-export interface Product {
-  id: number;
-  name: string;
-  shortDescription: string;
-  price: number;
-  imageUrl: string;
-}
-
+import { ProductModel } from '../../../models/product-model';
 
 @Component({
   selector: 'app-product',
@@ -21,6 +12,6 @@ export interface Product {
   providers: [HttpClient]
 })
 export class ProductComponent {
-  @Input() product!: Product;
+  @Input() product!: ProductModel;
 
 }

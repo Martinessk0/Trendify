@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, ProductComponent } from "../../shared/product/product.component";
+import { ProductComponent } from "../../shared/product/product.component";
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { ProductModel } from '../../../models/product-model';
+import { ProductService } from '../../../services/product-service';
 
 @Component({
   selector: 'app-home',
@@ -10,16 +12,13 @@ import { environment } from '../../../../environments/environment';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  products: Product[] = [];
+  products: ProductModel[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(public productService: ProductService) { }
 
   ngOnInit(): void {
-    this.http.get<Product[]>(`${environment.apiUrl}/Product`)
-      .subscribe(products => {
-        this.products = products;
-      }, err => {
-        console.error('Failed to load products', err);
-      });
+    this.productService.getAllProducts().subscribe(res =>{
+      this.products = res;
+    })
   }
 }

@@ -7,7 +7,7 @@ using trendify.Server.Entities;
 
 namespace trendify.Server.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     [ApiController]
     [Route("api/[controller]")]
     public class RolesController : ControllerBase

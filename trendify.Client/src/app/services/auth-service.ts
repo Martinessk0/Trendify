@@ -37,6 +37,16 @@ export class AuthService {
             .post<AuthResponseModel>(`${this.apiUrl}/account/register`, data);
     }
 
+    isAdmin(): boolean{
+        const token = this.getToken();
+            if (!token) return false;
+            const decodedToken: any = jwtDecode(token);
+            const roles = decodedToken.role || [];
+            if (roles.some((item: any) => item === 'Admin')) return true;
+    
+        return false;
+    }
+
     // getUserDetail = () => {
     //     const token = this.getToken();
     //     if (!token) return undefined;

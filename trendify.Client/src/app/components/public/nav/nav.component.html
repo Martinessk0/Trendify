@@ -43,6 +43,9 @@
         <ul class="dropdown-menu dropdown-menu-end">
           <li><a class="dropdown-item" href="/profile">Profile</a></li>
           <li><a class="dropdown-item" href="#">Orders</a></li>
+          @if(authService.isAdmin()) {
+            <li><a class="dropdown-item" href="#">Administration</a></li>
+          }
           <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
         </ul>
       </div>

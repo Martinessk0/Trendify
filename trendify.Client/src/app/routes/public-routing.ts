@@ -6,6 +6,7 @@ import { LoginComponent } from '../components/public/account/login/login.compone
 import { authGuard } from '../guards/auth.guard';
 import { ProductDetailsComponent } from '../components/shared/product-details/product-details.component';
 import { ShopComponent } from '../components/public/shop/shop.component';
+import { RegisterComponent } from '../components/public/account/register/register.component';
 
 export const publicRoutes: Routes = [
   {
@@ -15,29 +16,33 @@ export const publicRoutes: Routes = [
       {
         path: '',
         redirectTo: 'home-page',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'home-page',
-        component: HomeComponent
+        component: HomeComponent,
+      },
+      {
+        path: 'register',
+        component: RegisterComponent,
       },
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
       },
       {
         path: 'profile',
         component: ProfileComponent,
-        canActivate: [authGuard]
+        canActivate: [authGuard],
       },
       {
         path: 'shop',
-        component: ShopComponent
+        component: ShopComponent,
       },
       {
         path: 'product/details/:id',
-        component: ProductDetailsComponent
-      }
-    ]
-  }
+        component: ProductDetailsComponent,
+      },
+    ],
+  },
 ];

@@ -6,6 +6,7 @@ import { map, Observable } from "rxjs";
 import { LoginModel } from "../models/account/login-model";
 import { AuthResponseModel } from "../models/account/auth-response-model";
 import { ProfileModel } from "../models/account/profile-model";
+import { RegisterModel } from "../models/account/register-model";
 
 @Injectable({
     providedIn: 'root',
@@ -29,6 +30,11 @@ export class AuthService {
                     return response;
                 })
             );
+    }
+
+    register(data: RegisterModel): Observable<AuthResponseModel> {
+        return this.http
+            .post<AuthResponseModel>(`${this.apiUrl}/account/register`, data);
     }
 
     // getUserDetail = () => {

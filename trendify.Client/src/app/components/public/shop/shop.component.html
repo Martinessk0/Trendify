@@ -1,0 +1,10 @@
+<div class="container py-5">
+    <h2 class="text-center mb-4">Shop All Products</h2>
+  
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <div class="col" *ngFor="let product of products">
+        <app-product [product]="product"></app-product>
+      </div>
+    </div>
+  </div>
+  

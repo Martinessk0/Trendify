@@ -78,6 +78,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddApplicationServices();
+
 var app = builder.Build();
 
 

@@ -5,6 +5,7 @@
         public string Id { get; set; }
         public bool isOnSale { get; set; } = false;
         public bool isItNew { get; set; } = false;
+        public bool isFeatured { get; set; } = false;
         public string Name { get; set; } = null!;
         public string Category { get; set; } = null!;
         public string ShortDescription { get; set; } = null!;

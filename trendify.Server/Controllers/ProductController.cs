@@ -23,8 +23,8 @@ namespace trendify.Server.Controllers
                 {
                     Id = "2",
                     Name = "Pepsi",
-                    isItNew = true,
                     isOnSale = true,
+                    isFeatured = true,
                     Category = "Drinks",
                     Price = 1.80m,
                     ShortDescription = "Pepsi-Cola",
@@ -34,6 +34,7 @@ namespace trendify.Server.Controllers
                 new Product
                 {
                     Id = "3",
+                    isFeatured = true,
                     Name = "Orange Juice",
                     Category = "Drinks",
                     Price = 3.50m,
@@ -78,6 +79,7 @@ namespace trendify.Server.Controllers
                     Id = "7",
                     Name = "Chocolate Bar",
                     isItNew = true,
+                    isFeatured = true,
                     Category = "Snack",
                     Price = 1.50m,
                     ShortDescription = "Milk chocolate, 100 g",
@@ -86,23 +88,33 @@ namespace trendify.Server.Controllers
                 },
             };
 
-        
+
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetAllProducts()
-        {     
+        {
             return Ok(products);
         }
 
+        [HttpGet("featured")]
+        public async Task<ActionResult<List<Product>>> GetAllFeaturedProducts()
+        {
+            var result = products.Where(x => x.isFeatured == true);
+            return Ok(result);
+        }
 
-           [HttpGet("details/{id}")]
-           public async Task<ActionResult<Product>> GetProductById(string id){
-                foreach(var prd in products){
-                    if(prd.Id == id){
+
+        [HttpGet("details/{id}")]
+        public async Task<ActionResult<Product>> GetProductById(string id)
+        {
+            foreach (var prd in products)
+            {
+                if (prd.Id == id)
+                {
                     return prd;
-                    }
                 }
+            }
 
             return NotFound();
-           }
+        }
     }
 }

@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   constructor(public productService: ProductService) { }
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe(res =>{
+    this.productService.getAllFeaturedProducts().subscribe(res =>{
       this.products = res;
     })
   }

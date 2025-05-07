@@ -7,6 +7,7 @@ import { authGuard } from '../guards/auth.guard';
 import { ProductDetailsComponent } from '../components/shared/product-details/product-details.component';
 import { ShopComponent } from '../components/public/shop/shop.component';
 import { RegisterComponent } from '../components/public/account/register/register.component';
+import { CartComponent } from '../components/public/cart/cart.component';
 
 export const publicRoutes: Routes = [
   {
@@ -34,6 +35,10 @@ export const publicRoutes: Routes = [
         path: 'profile',
         component: ProfileComponent,
         canActivate: [authGuard],
+      },
+      {
+        path: 'cart',
+        component: CartComponent
       },
       {
         path: 'shop',

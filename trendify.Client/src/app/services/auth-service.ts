@@ -42,7 +42,8 @@ export class AuthService {
             if (!token) return false;
             const decodedToken: any = jwtDecode(token);
             const roles = decodedToken.role || [];
-            if (roles.some((item: any) => item === 'Admin')) return true;
+            if (roles.includes('Admin')) return true;
+
     
         return false;
     }

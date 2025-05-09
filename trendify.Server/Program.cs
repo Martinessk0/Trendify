@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using trendify.Server.Data;
-using trendify.Server.Entities;
+using trendify.Server.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 

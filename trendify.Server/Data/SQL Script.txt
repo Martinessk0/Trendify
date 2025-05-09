@@ -1,0 +1,36 @@
+INSERT INTO [Trendify].[dbo].[Products] 
+([Id], [IsOnSale], [IsItNew], [IsFeatured], [Name], [Category], [ShortDescription], [Description], [Price], [ImageUrl], [IsActive], [CreatedAt], [ModifiedAt])
+VALUES 
+('101', 0, 0, 0, 'Cola', 'Drinks', 'Coca-Cola', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s...', 2.0, 'https://upload.wikimedia.org/wikipedia/commons/2/27/Coca_Cola_Flasche_-_Original_Taste.jpg', 1, GETDATE(), GETDATE());
+
+INSERT INTO [Trendify].[dbo].[Products] 
+VALUES 
+('102', 1, 0, 1, 'Pepsi', 'Drinks', 'Pepsi-Cola', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry...', 1.8, 'https://cdncloudcart.com/29826/products/images/35920/pepsi-cola-ken--330-ml-663dc988f1174_1920x1920.jpeg?1715325588', 1, GETDATE(), GETDATE());
+
+INSERT INTO [Trendify].[dbo].[Products] 
+VALUES 
+('103', 0, 0, 1, 'Orange Juice', 'Drinks', 'Freshly squeezed orange juice', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry...', 3.5, 'https://m.media-amazon.com/images/I/71uboskGHBL._SL1500_.jpg', 1, GETDATE(), GETDATE());
+
+INSERT INTO [Trendify].[dbo].[Products] 
+VALUES 
+('104', 0, 0, 0, 'Bottled Water', 'Drinks', 'Spring water, 500 ml', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry...', 1.0, 'https://devin2u.bg/media/catalog/product/cache/c27388d20c7c52543d9bb519b036e8ba/d/e/devin-izvorna-voda-70240000000.jpg', 1, GETDATE(), GETDATE());
+
+INSERT INTO [Trendify].[dbo].[Products] 
+VALUES 
+('105', 1, 0, 0, 'Lemonade', 'Drinks', 'Homemade style lemonade', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry...', 2.75, 'https://herbsandflour.com/wp-content/uploads/2020/05/Homemade-Lemonade-Recipe.jpg', 1, GETDATE(), GETDATE());
+
+INSERT INTO [Trendify].[dbo].[Products] 
+VALUES 
+('106', 1, 0, 0, 'Iced Tea', 'Drinks', 'Brewed black tea, chilled', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry...', 2.25, 'https://bgonlineshop.com/Images/Items/Big/927.jpg', 1, GETDATE(), GETDATE());
+
+INSERT INTO [Trendify].[dbo].[Products] 
+VALUES 
+('107', 0, 1, 1, 'Chocolate Bar', 'Snack', 'Milk chocolate, 100 g', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry...', 1.5, 'https://www.lolliandpops.com/cdn/shop/files/lolli-and-pops-international-milka-caramel-filled-chocolate-bar-29733548785864.png?v=1698929462&width=640e', 1, GETDATE(), GETDATE());
+
+
+
+
+INSERT INTO [Trendify].[dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp])
+VALUES 
+  ('1', 'Admin', 'ADMIN', NULL),
+  ('2', 'User', 'USER', NULL);

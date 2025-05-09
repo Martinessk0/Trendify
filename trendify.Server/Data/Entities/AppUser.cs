@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace trendify.Server.Entities
+namespace trendify.Server.Data.Entities
 {
     public class AppUser : IdentityUser
     {

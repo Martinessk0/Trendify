@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using trendify.Server.Data.Common;
-using trendify.Server.Entities;
+using trendify.Server.Data.Entities;
 
 namespace trendify.Server.Controllers
 {
@@ -35,15 +35,15 @@ namespace trendify.Server.Controllers
         [HttpGet("details/{id}")]
         public async Task<ActionResult<Product>> GetProductById(string id)
         {
-            //        var products = repo.AllReadonly<Product>()
-            //.Where(h => h.IsActive);
-            //        foreach (var prd in products)
-            //        {
-            //            if (prd.Id == id)
-            //            {
-            //                return prd;
-            //            }
-            //        }
+            var products = repo.AllReadonly<Product>()
+                .Where(h => h.IsActive);
+            foreach (var prd in products)
+            {
+                if (prd.Id == id)
+                {
+                    return prd;
+                }
+            }
 
             return NotFound();
         }

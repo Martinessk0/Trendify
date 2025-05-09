@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using trendify.Server.Data.Entities;
 using trendify.Server.Dtos;
 using trendify.Server.Dtos.Account;
-using trendify.Server.Entities;
 
 namespace trendify.Server.Controllers
 {

@@ -1,5 +1,5 @@
 export interface ProductModel {
-    id: number;
+    id: string;
     isOnSale: boolean;
     isItNew: boolean;
     name: string;

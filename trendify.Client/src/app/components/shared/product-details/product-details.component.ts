@@ -3,6 +3,8 @@ import { ProductModel } from '../../../models/product-model';
 import { ProductService } from '../../../services/product-service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../../services/cart-service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-details',
@@ -18,7 +20,8 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     public productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +47,27 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
-  addToCart(){
-    
+  addToCart(): void {
+    if (!this.product?.id) {
+      Swal.fire('Error', 'Invalid product ID', 'error');
+      return;
+    }
+  
+    this.cartService.addToCart(this.product.id, 1).subscribe({
+      next: () => {
+        Swal.fire({
+          title: 'Added to Cart!',
+          text: `${this.product!.name} was added successfully.`,
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      },
+      error: (err) => {
+        console.error(err);
+        Swal.fire('Failed', 'Could not add product to cart. Please try again.', 'error');
+      }
+    });
   }
+  
+  
 }

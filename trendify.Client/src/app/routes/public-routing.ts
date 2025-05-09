@@ -8,6 +8,7 @@ import { ProductDetailsComponent } from '../components/shared/product-details/pr
 import { ShopComponent } from '../components/public/shop/shop.component';
 import { RegisterComponent } from '../components/public/account/register/register.component';
 import { CartComponent } from '../components/public/cart/cart.component';
+import { CheckoutComponent } from '../components/public/checkout/checkout.component';
 
 export const publicRoutes: Routes = [
   {
@@ -39,6 +40,10 @@ export const publicRoutes: Routes = [
       {
         path: 'cart',
         component: CartComponent
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent
       },
       {
         path: 'shop',

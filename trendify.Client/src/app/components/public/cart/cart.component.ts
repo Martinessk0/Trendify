@@ -1,43 +1,69 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CartService } from '../../../services/cart-service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
-interface CartItem {
+export interface CartItem {
   id: number;
-  name: string;
-  price: number;
   quantity: number;
-  imageUrl: string;
+  product: {
+    id: string;
+    name: string;
+    price: number;
+    imageUrl: string;
+  };
 }
 
 @Component({
   selector: 'app-cart',
   imports: [CommonModule],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.scss'
+  styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  cartItems: CartItem[] = [
-    { id: 1, name: 'Lemonade', price: 5.80, quantity: 2, imageUrl: 'https://herbsandflour.com/wp-content/uploads/2020/05/Homemade-Lemonade-Recipe.jpg' },
-    { id: 2, name: 'Iced tea', price: 2.10, quantity: 1, imageUrl: 'https://bgonlineshop.com/Images/Items/Big/927.jpg' }
-  ];
+  cartItems: CartItem[] = [];
 
-  getTotal(): number {
-    return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  constructor(private cartService: CartService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.loadCart();
+  }
+
+  loadCart(): void {
+    this.cartService.getCart().subscribe((items) => {
+      this.cartItems = items;
+    });
   }
 
   updateQuantity(item: CartItem, delta: number): void {
-    item.quantity += delta;
-    if (item.quantity < 1) {
+    const newQuantity = item.quantity + delta;
+    if (newQuantity < 1) {
       this.removeItem(item);
+      return;
     }
+
+    this.cartService.addToCart(item.product.id, delta).subscribe(() => {
+      item.quantity = newQuantity;
+    });
   }
 
   removeItem(item: CartItem): void {
-    this.cartItems = this.cartItems.filter(i => i.id !== item.id);
+    this.cartService.removeFromCart(item.product.id).subscribe(() => {
+      this.cartItems = this.cartItems.filter(
+        (i) => i.product.id !== item.product.id
+      );
+    });
   }
 
   proceedToCheckout(): void {
-    // Logic for checkout
-    alert('Proceeding to checkout...');
+    this.router.navigate(['checkout']);
+  }
+
+  getTotal(): number {
+    return this.cartItems.reduce(
+      (acc, item) => acc + item.quantity * item.product.price,
+      0
+    );
   }
 }

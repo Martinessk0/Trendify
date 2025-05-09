@@ -1,0 +1,48 @@
+<div class="container py-4">
+    <h2 class="mb-4">Checkout</h2>
+  
+    <div *ngIf="cartItems.length === 0" class="alert alert-info">
+      Your cart is empty.
+    </div>
+  
+    <div *ngIf="cartItems.length > 0">
+      <h4>Your Items</h4>
+      <table class="table align-middle text-center">
+        <thead class="table-light">
+          <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems">
+            <td><img [src]="item.product.imageUrl" style="width: 60px;"></td>
+            <td class="text-start">{{ item.product.name }}</td>
+            <td>{{ item.product.price | currency }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.quantity * item.product.price | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div class="d-flex justify-content-end mb-4">
+        <h5>Total: {{ getTotal() | currency }}</h5>
+      </div>
+  
+      <form [formGroup]="form" (ngSubmit)="submit()" class="mb-3">
+        <div class="mb-3">
+          <label class="form-label">Full Name</label>
+          <input type="text" formControlName="name" class="form-control" placeholder="Your full name">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Shipping Address</label>
+          <textarea formControlName="address" class="form-control" placeholder="Your address"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
+  

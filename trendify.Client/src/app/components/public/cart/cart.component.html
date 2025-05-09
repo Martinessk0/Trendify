@@ -1,48 +1,52 @@
 <div class="container py-4">
-    <h2 class="mb-4">Your Cart</h2>
-  
-    <div *ngIf="cartItems.length === 0" class="alert alert-info">
-      Your cart is empty.
-    </div>
-  
-    <div *ngIf="cartItems.length > 0" class="table-responsive">
-      <table class="table align-middle text-center">
-        <thead class="table-secondary">
-          <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of cartItems">
-            <td>
-              <img [src]="item.imageUrl" alt="{{ item.name }}" class="img-thumbnail" style="width: 60px; height: auto;">
-            </td>
-            <td class="text-start">{{ item.name }}</td>
-            <td>{{ item.price | currency }}</td>
-            <td>
-              <div class="btn-group" role="group">
-                <button class="btn btn-outline-secondary btn-sm" (click)="updateQuantity(item, -1)">−</button>
-                <button class="btn btn-light btn-sm disabled">{{ item.quantity }}</button>
-                <button class="btn btn-outline-secondary btn-sm" (click)="updateQuantity(item, 1)">+</button>
-              </div>
-            </td>
-            <td>{{ item.price * item.quantity | currency }}</td>
-            <td>
-              <button class="btn btn-sm btn-danger" (click)="removeItem(item)">Remove</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
-      <h4 class="mb-3 mb-md-0">Total: {{ getTotal() | currency }}</h4>
-      <button class="btn btn-lg btn-primary text-white" (click)="proceedToCheckout()">Proceed to Checkout</button>
-    </div>
+  <h2 class="mb-4">Your Cart</h2>
+
+  <div *ngIf="cartItems.length === 0" class="alert alert-info">
+    Your cart is empty.
   </div>
-  
+
+  <div *ngIf="cartItems.length > 0" class="table-responsive">
+    <table class="table align-middle text-center">
+      <thead class="table-secondary">
+        <tr>
+          <th>Image</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems">
+          <td>
+            <img [src]="item.product.imageUrl" 
+                 alt="{{ item.product.name }}" 
+                 class="img-thumbnail" 
+                 style="width: 60px; height: auto;">
+          </td>
+          <td class="text-start">{{ item.product.name }}</td>
+          <td>{{ item.product.price | currency }}</td>
+          <td>
+            <div class="btn-group" role="group">
+              <button class="btn btn-outline-secondary btn-sm" 
+                      (click)="updateQuantity(item, -1)">−</button>
+              <button class="btn btn-light btn-sm disabled">{{ item.quantity }}</button>
+              <button class="btn btn-outline-secondary btn-sm" 
+                      (click)="updateQuantity(item, 1)">+</button>
+            </div>
+          </td>
+          <td>{{ item.quantity * item.product.price | currency }}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="removeItem(item)">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
+    <h4 class="mb-3 mb-md-0">Total: {{ getTotal() | currency }}</h4>
+    <button class="btn btn-lg btn-primary text-white" (click)="proceedToCheckout()">Proceed to Checkout</button>
+  </div>
+</div>

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using trendify.Server.Data.Common;
 using trendify.Server.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace trendify.Server.Controllers
 {
@@ -24,33 +25,50 @@ namespace trendify.Server.Controllers
         public async Task<ActionResult<List<CartItem>>> GetCart()
         {
             var userId = GetUserId();
-            var cartItems = repo.AllReadonly<CartItem>()
-                .Where(c => c.UserId == userId).ToList();
+
+            var cartItems = await repo.AllReadonly<CartItem>()
+                .Where(c => c.UserId == userId)
+                .Include(c => c.Product) 
+                .ToListAsync();
 
             return Ok(cartItems);
         }
 
+
+        public class AddToCartDto
+        {
+            public string ProductId { get; set; } = null!;
+            public int Quantity { get; set; }
+        }
+
         [HttpPost]
-        public async Task<IActionResult> AddToCart([FromBody] CartItem item)
+        public async Task<IActionResult> AddToCart([FromBody] AddToCartDto dto)
         {
             var userId = GetUserId();
             var existing = repo.All<CartItem>()
-                .FirstOrDefault(x => x.UserId == userId && x.ProductId == item.ProductId);
+                .FirstOrDefault(x => x.UserId == userId && x.ProductId == dto.ProductId);
 
             if (existing != null)
             {
-                existing.Quantity += item.Quantity;
+                existing.Quantity += dto.Quantity;
                 await repo.SaveChangesAsync();
             }
             else
             {
-                item.UserId = userId;
+                var item = new CartItem
+                {
+                    ProductId = dto.ProductId,
+                    Quantity = dto.Quantity,
+                    UserId = userId
+                };
+
                 await repo.AddAsync(item);
                 await repo.SaveChangesAsync();
             }
 
             return Ok();
         }
+
 
         [HttpDelete("{productId}")]
         public async Task<IActionResult> RemoveFromCart(string productId)

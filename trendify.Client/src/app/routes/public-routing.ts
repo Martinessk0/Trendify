@@ -9,6 +9,7 @@ import { ShopComponent } from '../components/public/shop/shop.component';
 import { RegisterComponent } from '../components/public/account/register/register.component';
 import { CartComponent } from '../components/public/cart/cart.component';
 import { CheckoutComponent } from '../components/public/checkout/checkout.component';
+import { OrdersComponent } from '../components/public/orders/orders.component';
 
 export const publicRoutes: Routes = [
   {
@@ -48,6 +49,10 @@ export const publicRoutes: Routes = [
       {
         path: 'shop',
         component: ShopComponent,
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent      
       },
       {
         path: 'product/details/:id',

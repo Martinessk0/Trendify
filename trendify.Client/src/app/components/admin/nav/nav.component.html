@@ -1,7 +1,7 @@
 <!-- nav-component.html -->
 <nav class="navbar navbar-expand-lg navbar-primary bg-primary fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand text-white" href="#">Trendify Admin</a>
+    <a class="navbar-brand text-white" [routerLink]="['/']">Trendify Admin</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -32,10 +32,14 @@
             class="dropdown-menu dropdown-menu-end"
             aria-labelledby="adminMenu"
           >
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/profile']">Profile</a>
+            </li>
+            <li><a class="dropdown-item" [routerLink]="['/']">Settings</a></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Logout</a></li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/heroes']">Logout</a>
+            </li>
           </ul>
         </li>
       </ul>
@@ -47,22 +51,24 @@
 >
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link text-white" href="#">Dashboard</a>
+      <a class="nav-link text-white" [routerLink]="['/admin/home']">Dashboard</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">Products</a>
+      <a class="nav-link text-light" [routerLink]="['/admin/products']"
+        >Products</a
+      >
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">Orders</a>
+      <a class="nav-link text-light" [routerLink]="['/orders']">Orders</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">Customers</a>
+      <a class="nav-link text-light" [routerLink]="['/customers']">Customers</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">Analytics</a>
+      <a class="nav-link text-light" [routerLink]="['/']">Analytics</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-light" href="#">Settings</a>
+      <a class="nav-link text-light" [routerLink]="['/']">Settings</a>
     </li>
   </ul>
 </nav>

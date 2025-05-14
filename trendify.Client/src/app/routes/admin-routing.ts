@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 import { HomeComponent } from "../components/admin/home/home.component";
 import { LayoutComponent } from "../components/admin/layout/layout.component";
+import { ProductsComponent } from "../components/admin/products/products.component";
 
 export const adminRoutes: Routes = [
   {
@@ -9,13 +10,17 @@ export const adminRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'home-page',
+        redirectTo: 'home',
         pathMatch: 'full',
       },
       {
         path: 'home',
         component: HomeComponent,
       },
+      {
+        path: 'products',
+        component: ProductsComponent
+      }
     ],
   },
 ];

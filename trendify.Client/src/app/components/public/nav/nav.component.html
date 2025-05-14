@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- Brand -->
     <!-- <img id="logo" src="assets/images/trendify_logo.png" alt="Trendify Logo" height="40px" width="100px"> -->
-    <a class="navbar-brand fw-bold" href="#">Trendify</a>
+    <a class="navbar-brand fw-bold" [routerLink]="['/']">Trendify</a>
 
     <!-- Mobile toggle -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
@@ -13,23 +13,23 @@
     <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="/">Home</a>
+          <a class="nav-link active" [routerLink]="['/']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/shop">Shop</a>
+          <a class="nav-link" [routerLink]="['/shop']">Shop</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" [routerLink]="['/']">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" [routerLink]="['/']">Contact</a>
         </li>
       </ul>
     </div>
 
     <form class="d-flex align-items-center">
       @if (isLoggedIn()) {
-      <a href="/cart" class="position-relative me-3 text-white">
+      <a [routerLink]="['/cart']" class="position-relative me-3 text-white">
         <i class="bi bi-cart" style="font-size: 1.25rem;"></i>
         <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
           3
@@ -41,22 +41,18 @@
         <img src="assets/images/avatar.png" class="dropdown-toggle rounded-circle" alt="User avatar" id="dropdownImg"
           role="button" width="32" height="32" data-bs-toggle="dropdown" aria-expanded="false">
         <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" href="/profile">Profile</a></li>
-          <li><a class="dropdown-item" href="/orders">Orders</a></li>
+          <li><a class="dropdown-item" [routerLink]="['/profile']">Profile</a></li>
+          <li><a class="dropdown-item" [routerLink]="['/orders']">Orders</a></li>
           @if(authService.isAdmin()) {
-            <li><a class="dropdown-item" href="/admin/home">Administration</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/admin']">Administration</a></li>
           }
           <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
         </ul>
       </div>
       }
       @else {
-        <a href="/login" class="btn btn-outline-light btn-sm">Login</a>
+        <a [routerLink]="['/login']" class="btn btn-outline-light btn-sm">Login</a>
       }
-
-      <!-- <a href="#">
-        <img src="assets/images/avatar.png" alt="User avatar" class="rounded-circle" width="32" height="32">
-      </a> -->
     </form>
   </div>
 </nav>

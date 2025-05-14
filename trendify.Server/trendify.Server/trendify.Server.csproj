@@ -22,4 +22,8 @@
     <ProjectReference Include="..\trendify.Core\trendify.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\Products\" />
+  </ItemGroup>
+
 </Project>

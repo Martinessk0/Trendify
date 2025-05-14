@@ -44,5 +44,19 @@ namespace trendify.Core.Services
                 }).FirstAsync();
 
         }
+
+        public async Task<List<AllProductsModel>> GetFeatured()
+        {
+            return await repo.AllReadonly<Product>().Where(p => p.IsActive && p.IsFeatured).Select(p => new AllProductsModel()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                ImageUrl = p.ImageUrl,
+                Price = p.Price,
+                Category = p.Category.Name,
+
+            }).ToListAsync();
+        }
     }
 }

@@ -10,6 +10,13 @@ namespace trendify.Infrastructure.Data.Entities
         [Key]
         public int Id { get; set; }
 
+        public bool IsOnSale { get; set; } = false;
+
+        public bool IsItNew { get; set; } = false;
+
+        public bool IsFeatured { get; set; } = false;
+
+
         [Required]
         [StringLength(ProductConstants.NameMaxLength)]
         public string Name { get; set; } = null!;

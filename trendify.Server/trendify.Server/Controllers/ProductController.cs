@@ -31,5 +31,11 @@ namespace trendify.Server.Controllers
 
             return result;
         }
+
+        [HttpGet("featured")]
+        public async Task<List<AllProductsModel>> GetFeatured()
+        {
+            return await _productService.GetFeatured();
+        }
     }
 }

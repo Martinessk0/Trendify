@@ -1,45 +1,68 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
-    <div class="container-fluid">
-      <!-- Brand -->
-      <!-- <img id="logo" src="assets/images/trendify_logo.png" alt="Trendify Logo" height="40px" width="100px"> -->
-      <a class="navbar-brand fw-bold" href="#">Trendify</a>
-  
-      <!-- Mobile toggle -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="/">Home</a>
-          </li>
-        </ul>
-      </div>
-  
-      <form class="d-flex align-items-center">
-        @if (isLoggedIn()) {
-        <div class="dropdown">
-          <img src="assets/images/avatar.png" class="dropdown-toggle rounded-circle" alt="User avatar" id="dropdownImg"
-            role="button" width="32" height="32" data-bs-toggle="dropdown" aria-expanded="false">
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="/profile">Profile</a></li>
-            <li><a class="dropdown-item" href="/orders">Orders</a></li>
-            @if(authService.isAdmin()) {
-              <li><a class="dropdown-item" href="/admin/home">Administration</a></li>
-            }
-            <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
+<!-- nav-component.html -->
+<nav class="navbar navbar-expand-lg navbar-primary bg-primary fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">Trendify Admin</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle d-flex align-items-center"
+            href="#"
+            id="adminMenu"
+            data-bs-toggle="dropdown"
+          >
+            <img
+              src="assets/images/avatar.png"
+              class="dropdown-toggle rounded-circle"
+              alt="User avatar"
+              width="32"
+              height="32"
+            />
+            <span> Admin</span>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="adminMenu"
+          >
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
           </ul>
-        </div>
-        }
-        @else {
-          <a href="/login" class="btn btn-outline-light btn-sm">Login</a>
-        }
-  
-        <!-- <a href="#">
-          <img src="assets/images/avatar.png" alt="User avatar" class="rounded-circle" width="32" height="32">
-        </a> -->
-      </form>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
+<nav
+  class="col-md-2 d-none d-md-block mt-4 bg-primary text-light sidebar vh-100 position-fixed pt-5"
+>
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="#">Products</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="#">Orders</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="#">Customers</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="#">Analytics</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-light" href="#">Settings</a>
+    </li>
+  </ul>
+</nav>

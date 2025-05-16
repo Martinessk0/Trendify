@@ -7,7 +7,6 @@ namespace trendify.Core.Models.Products
     public class CreateProductDto
     {
         public string Name { get; set; } = null!;
-        public string ShortDescription { get; set; } = null!;
 
         public string Description { get; set; } = null!;
 
@@ -16,5 +15,11 @@ namespace trendify.Core.Models.Products
         public decimal Price { get; set; }
 
         public string Category { get; set; } = null!;
+
+        public bool IsOnSale { get; set; } = false;
+
+        public bool IsItNew { get; set; } = false;
+
+        public bool IsFeatured { get; set; } = false;
     }
 }

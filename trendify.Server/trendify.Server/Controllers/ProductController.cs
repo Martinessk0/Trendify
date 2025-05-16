@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using trendify.Core.Contracts;
 using trendify.Core.Models.Products;
+using trendify.Infrastructure.Data.Entities;
 
 namespace trendify.Server.Controllers
 {
@@ -38,14 +39,13 @@ namespace trendify.Server.Controllers
             return await _productService.GetFeatured();
         }
 
-        //[HttpPost]
-        //public async Task<List<AllProductsModel>> Create(CreateProductDto model)
-        //{
-        //    var result = await _productService.CreateProduct(model);
+        [HttpPost]
+        public async Task<Product> Create(CreateProductDto model)
+        {
+            var result = await _productService.CreateProduct(model);
 
-
-        //    return result;
-        //}
+            return result;
+        }
 
 
         [HttpGet("totalCount")]

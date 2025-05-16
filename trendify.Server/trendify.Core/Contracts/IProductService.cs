@@ -1,4 +1,5 @@
 ﻿using trendify.Core.Models.Products;
+using trendify.Infrastructure.Data.Entities;
 
 namespace trendify.Core.Contracts
 {
@@ -11,5 +12,7 @@ namespace trendify.Core.Contracts
         public Task<ProductDetailsByIdModel> GetDetailsById(int id);
 
         public Task<int> TotalProducts();
+
+        public Task<Product> CreateProduct(CreateProductDto model);
     }
 }

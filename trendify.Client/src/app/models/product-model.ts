@@ -5,7 +5,6 @@ export class ProductModel {
   isFeatured!: boolean;
   name!: string;
   category!: string;
-  shortDescription!: string;
   description!: string;
   price!: number;
   imageUrl!: string;

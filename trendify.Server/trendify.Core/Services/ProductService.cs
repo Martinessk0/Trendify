@@ -59,18 +59,37 @@ namespace trendify.Core.Services
             }).ToListAsync();
         }
 
-        //public async Task<Product> CreateProduct(CreateProductDto model){
-        //    var category = await repo.AllReadonly<Category>().Where(c => c.Name == model.Category);
+        public async Task<Product> CreateProduct(CreateProductDto model)
+        {
+            var category = await repo.AllReadonly<Category>()
+                                     .FirstOrDefaultAsync(c => c.Name == model.Category);
 
-        //    return new Product()
-        //    {
-        //        Name = model.Name,
-        //        Description = model.Description,
-        //        ImageUrl = model.ImageUrl,
-        //        Price = model.Price,
-        //        Category = category.Name,
-        //    };
-        //}
+            if (category == null)
+            {
+                throw new ArgumentException("Category not found");
+            }
+
+            var product = new Product
+            {
+                Name = model.Name,
+                IsFeatured = model.IsFeatured,
+                IsItNew = model.IsItNew,
+                IsOnSale = model.IsOnSale,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                Price = model.Price,
+                CategoryId = category.Id,
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow,
+                ModifiedAt = DateTime.UtcNow,
+            };
+
+            await repo.AddAsync(product);
+            await repo.SaveChangesAsync();
+
+            return product;
+        }
+
 
         public async Task<int> TotalProducts()
         {

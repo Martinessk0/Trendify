@@ -9,6 +9,7 @@ import { ProductModel } from '../../../models/product-model';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormActions } from '../../../enums/form-actions.enum';
 import { ProductFormDialogComponent, ProductDialogData } from './product-form-dialog/product-form-dialog.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products',
@@ -31,7 +32,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   constructor(
     private productService: ProductService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.productService.getAllProducts().subscribe((products) => {
@@ -58,11 +59,32 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result?.model) {
-        this.dataSource.data = [...this.dataSource.data, result.model];
-        this.dataSource._updateChangeSubscription();
+        this.productService.createProduct(result.model).subscribe({
+          next: (createdProduct) => {
+            this.dataSource.data = [...this.dataSource.data, createdProduct];
+            this.dataSource._updateChangeSubscription();
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Product created successfully!',
+              confirmButtonColor: '#3085d6',
+            });
+          },
+          error: (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: err?.error?.message || 'Failed to create product.',
+              confirmButtonColor: '#d33',
+            });
+          },
+        });
       }
     });
   }
+
+
 
   show(model: ProductModel) {
     this.dialog.open(ProductFormDialogComponent, {

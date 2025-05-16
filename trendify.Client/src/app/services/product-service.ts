@@ -27,4 +27,9 @@ export class ProductService {
   getTotalCount(){
     return this.http.get<number>(`${this.apiUrl}/product/totalCount`)
   }
+
+  createProduct(product: ProductModel): Observable<ProductModel> {
+  return this.http.post<ProductModel>(`${this.apiUrl}/product`, product);
+}
+
 }

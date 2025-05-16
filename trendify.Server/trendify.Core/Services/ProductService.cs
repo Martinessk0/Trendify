@@ -59,6 +59,19 @@ namespace trendify.Core.Services
             }).ToListAsync();
         }
 
+        //public async Task<Product> CreateProduct(CreateProductDto model){
+        //    var category = await repo.AllReadonly<Category>().Where(c => c.Name == model.Category);
+
+        //    return new Product()
+        //    {
+        //        Name = model.Name,
+        //        Description = model.Description,
+        //        ImageUrl = model.ImageUrl,
+        //        Price = model.Price,
+        //        Category = category.Name,
+        //    };
+        //}
+
         public async Task<int> TotalProducts()
         {
             return await repo.AllReadonly<Product>().Where(p => p.IsActive).CountAsync();

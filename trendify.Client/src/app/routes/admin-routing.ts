@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { HomeComponent } from "../components/admin/home/home.component";
 import { LayoutComponent } from "../components/admin/layout/layout.component";
 import { ProductsComponent } from "../components/admin/products/products.component";
+import { CategoriesComponent } from "../components/admin/categories/categories.component";
 
 export const adminRoutes: Routes = [
   {
@@ -20,6 +21,10 @@ export const adminRoutes: Routes = [
       {
         path: 'products',
         component: ProductsComponent
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent
       }
     ],
   },

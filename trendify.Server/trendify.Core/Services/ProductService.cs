@@ -26,6 +26,9 @@ namespace trendify.Core.Services
                 ImageUrl = p.ImageUrl,
                 Price = p.Price,
                 Category = p.Category.Name,
+                IsOnSale = p.IsOnSale,
+                IsItNew = p.IsItNew,
+                IsFeatured = p.IsFeatured,
 
             }).ToListAsync();
         }

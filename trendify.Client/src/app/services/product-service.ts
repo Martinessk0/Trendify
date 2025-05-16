@@ -23,4 +23,8 @@ export class ProductService {
   getAllFeaturedProducts(){
     return this.http.get<ProductModel[]>(`${this.apiUrl}/product/featured`);
   }
+
+  getTotalCount(){
+    return this.http.get<number>(`${this.apiUrl}/product/totalCount`)
+  }
 }

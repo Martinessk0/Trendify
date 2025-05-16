@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { ProductService } from '../../../services/product-service';
 
 /**
  * @title Table with pagination
@@ -15,7 +16,16 @@ export class HomeComponent implements AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
+  totalProducts: number = 0;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private productService: ProductService) {
+    productService.getTotalCount().subscribe(res => {
+      this.totalProducts = res;
+      console.log(this.totalProducts);
+    });
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

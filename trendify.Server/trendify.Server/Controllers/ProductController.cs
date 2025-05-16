@@ -37,5 +37,11 @@ namespace trendify.Server.Controllers
         {
             return await _productService.GetFeatured();
         }
+
+        [HttpGet("totalCount")]
+        public async Task<int> TotalCount()
+        {
+            return await _productService.TotalProducts();
+        }
     }
 }

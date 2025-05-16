@@ -58,5 +58,10 @@ namespace trendify.Core.Services
 
             }).ToListAsync();
         }
+
+        public async Task<int> TotalProducts()
+        {
+            return await repo.AllReadonly<Product>().Where(p => p.IsActive).CountAsync();
+        }
     }
 }

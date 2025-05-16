@@ -44,7 +44,7 @@
           <li><a class="dropdown-item" [routerLink]="['/profile']">Profile</a></li>
           <li><a class="dropdown-item" [routerLink]="['/orders']">Orders</a></li>
           @if(authService.isAdmin()) {
-            <li><a class="dropdown-item" [routerLink]="['/admin']">Administration</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/admin/home']">Administration</a></li>
           }
           <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
         </ul>

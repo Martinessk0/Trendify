@@ -9,5 +9,7 @@ namespace trendify.Core.Contracts
         public Task<List<AllProductsModel>> GetFeatured();
 
         public Task<ProductDetailsByIdModel> GetDetailsById(int id);
+
+        public Task<int> TotalProducts();
     }
 }

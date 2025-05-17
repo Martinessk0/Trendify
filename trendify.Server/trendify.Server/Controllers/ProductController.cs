@@ -54,6 +54,20 @@ namespace trendify.Server.Controllers
             return result;
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _productService.DeleteProduct(id);
+
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+
 
 
         [HttpGet("totalCount")]

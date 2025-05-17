@@ -127,6 +127,25 @@ namespace trendify.Core.Services
             return product;
         }
 
+        public async Task<bool> DeleteProduct(int id)
+        {
+            var product = await repo.GetByIdAsync<Product>(id);
+
+            if (product == null || !product.IsActive)
+            {
+                return false;
+            }
+
+            product.IsActive = false;
+            product.ModifiedAt = DateTime.UtcNow;
+
+            repo.Update(product);
+            await repo.SaveChangesAsync();
+
+            return true;
+        }
+
+
 
 
         public async Task<int> TotalProducts()

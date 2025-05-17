@@ -141,10 +141,42 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
 
-  delete(id: string) {
-    if (confirm('Are you sure you want to delete this product?')) {
-      this.dataSource.data = this.dataSource.data.filter((p) => p.id !== id);
-      this.dataSource._updateChangeSubscription();
+delete(id: number) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'This product will be hidden from the shop.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.productService.deleteProduct(id).subscribe({
+        next: () => {
+          this.dataSource.data = this.dataSource.data.filter((p) => +p.id !== id);
+          this.dataSource._updateChangeSubscription();
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Deleted',
+            text: 'Product was deleted successfully!',
+            confirmButtonColor: '#3085d6',
+          });
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: err?.error?.message || 'Failed to delete product.',
+            confirmButtonColor: '#d33',
+          });
+        },
+      });
     }
-  }
+  });
+}
+
+
 }

@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CategoryService } from '../../../../services/category-service';
 import { CategoryModel } from '../../../../models/category-model';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 export interface ProductDialogData {
   title: string;
@@ -26,7 +26,8 @@ export interface ProductDialogData {
     MatInputModule,
     MatCheckboxModule,
     MatButtonModule,
-    NgFor
+    NgFor,
+    NgIf
   ],
   templateUrl: './product-form-dialog.component.html',
   styleUrl: './product-form-dialog.component.scss'
@@ -43,15 +44,16 @@ export class ProductFormDialogComponent {
     private categoryService: CategoryService
   ) {
     this.form = this.fb.group({
-      name: [data.model.name, Validators.required],
-      category: [data.model.category],
-      description: [data.model.description],
-      price: [data.model.price, [Validators.required, Validators.min(0)]],
-      imageUrl: [data.model.imageUrl],
-      isOnSale: [data.model.isOnSale ?? false],
-      isItNew: [data.model.isItNew ?? false],
-      isFeatured: [data.model.isFeatured ?? false],
+      name: [{ value: data.model.name, disabled: data.action === FormActions.VIEW }, Validators.required],
+      category: [{ value: data.model.category, disabled: data.action === FormActions.VIEW }],
+      description: [{ value: data.model.description, disabled: data.action === FormActions.VIEW }],
+      price: [{ value: data.model.price, disabled: data.action === FormActions.VIEW }, [Validators.required, Validators.min(0)]],
+      imageUrl: [{ value: data.model.imageUrl, disabled: data.action === FormActions.VIEW }],
+      isOnSale: [{ value: data.model.isOnSale ?? false, disabled: data.action === FormActions.VIEW }],
+      isItNew: [{ value: data.model.isItNew ?? false, disabled: data.action === FormActions.VIEW }],
+      isFeatured: [{ value: data.model.isFeatured ?? false, disabled: data.action === FormActions.VIEW }],
     });
+
 
     this.loadCategories();
   }
@@ -62,6 +64,11 @@ export class ProductFormDialogComponent {
       error: (err) => console.error('Failed to load categories:', err),
     });
   }
+
+  get isViewMode(): boolean {
+    return this.data.action === FormActions.VIEW;
+  }
+
 
   save() {
     console.log('Save clicked, form valid:', this.form);

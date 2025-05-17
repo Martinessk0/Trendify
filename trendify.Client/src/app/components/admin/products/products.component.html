@@ -41,9 +41,11 @@
                  </td>
               </ng-container>
           
-              <ng-container matColumnDef="shortDescription">
+              <ng-container matColumnDef="description">
                 <th mat-header-cell *matHeaderCellDef> Description </th>
-                <td mat-cell *matCellDef="let element"> {{element.shortDescription}} </td>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.description?.length > 20 ? (element.description | truncate) : element.description }}
+                </td>
               </ng-container>
 
               <ng-container matColumnDef="actions">

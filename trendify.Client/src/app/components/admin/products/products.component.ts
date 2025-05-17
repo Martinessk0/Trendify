@@ -10,6 +10,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormActions } from '../../../enums/form-actions.enum';
 import { ProductFormDialogComponent, ProductDialogData } from './product-form-dialog/product-form-dialog.component';
 import Swal from 'sweetalert2';
+import { TruncatePipe } from '../../../pipes/truncate-pipe';
 
 @Component({
   selector: 'app-products',
@@ -19,12 +20,13 @@ import Swal from 'sweetalert2';
     MatCardModule,
     MatIcon,
     MatButtonModule,
+    TruncatePipe
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['id', 'name', 'imageUrl', 'shortDescription', 'actions'];
+  displayedColumns = ['id', 'name', 'imageUrl', 'description', 'actions'];
   dataSource = new MatTableDataSource<ProductModel>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

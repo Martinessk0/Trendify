@@ -113,13 +113,33 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result?.model) {
-        this.dataSource.data = this.dataSource.data.map((p) =>
-          p.id === model.id ? result.model : p
-        );
-        this.dataSource._updateChangeSubscription();
+        this.productService.updateProduct(+model.id, result.model).subscribe({
+          next: (updatedProduct) => {
+            this.dataSource.data = this.dataSource.data.map((p) =>
+              p.id === updatedProduct.id ? updatedProduct : p
+            );
+            this.dataSource._updateChangeSubscription();
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Product updated successfully!',
+              confirmButtonColor: '#3085d6',
+            });
+          },
+          error: (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: err?.error?.message || 'Failed to update product.',
+              confirmButtonColor: '#d33',
+            });
+          },
+        });
       }
     });
   }
+
 
   delete(id: string) {
     if (confirm('Are you sure you want to delete this product?')) {

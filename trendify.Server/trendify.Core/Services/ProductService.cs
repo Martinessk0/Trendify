@@ -94,6 +94,41 @@ namespace trendify.Core.Services
         }
 
 
+        public async Task<Product> UpdateProduct(int id, CreateProductDto model)
+        {
+            var product = await repo.GetByIdAsync<Product>(id);
+
+            if (product == null || !product.IsActive)
+            {
+                throw new ArgumentException("Product not found");
+            }
+
+            var category = await repo.AllReadonly<Category>()
+                                     .FirstOrDefaultAsync(c => c.Name == model.Category);
+
+            if (category == null)
+            {
+                throw new ArgumentException("Category not found");
+            }
+
+            product.Name = model.Name;
+            product.Description = model.Description;
+            product.ImageUrl = model.ImageUrl;
+            product.Price = model.Price;
+            product.IsItNew = model.IsItNew;
+            product.IsOnSale = model.IsOnSale;
+            product.IsFeatured = model.IsFeatured;
+            product.CategoryId = category.Id;
+            product.ModifiedAt = DateTime.UtcNow;
+
+            repo.Update(product);
+            await repo.SaveChangesAsync();
+
+            return product;
+        }
+
+
+
         public async Task<int> TotalProducts()
         {
             return await repo.AllReadonly<Product>().Where(p => p.IsActive).CountAsync();

@@ -14,5 +14,8 @@ namespace trendify.Core.Contracts
         public Task<int> TotalProducts();
 
         public Task<Product> CreateProduct(CreateProductDto model);
+
+        Task<Product> UpdateProduct(int id, CreateProductDto model);
+
     }
 }

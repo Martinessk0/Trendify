@@ -47,6 +47,14 @@ namespace trendify.Server.Controllers
             return result;
         }
 
+        [HttpPut("{id}")]
+        public async Task<Product> Update(int id, [FromBody] CreateProductDto model)
+        {
+            var result = await _productService.UpdateProduct(id, model);
+            return result;
+        }
+
+
 
         [HttpGet("totalCount")]
         public async Task<int> TotalCount()

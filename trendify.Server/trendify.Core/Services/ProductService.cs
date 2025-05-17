@@ -25,7 +25,7 @@ namespace trendify.Core.Services
                 Description = p.Description,
                 ImageUrl = p.ImageUrl,
                 Price = p.Price,
-                Category = p.Category.Name,
+                CategoryId = p.Category.Id,
                 IsOnSale = p.IsOnSale,
                 IsItNew = p.IsItNew,
                 IsFeatured = p.IsFeatured,
@@ -44,6 +44,7 @@ namespace trendify.Core.Services
                     Description = p.Description,
                     ImageUrl = p.ImageUrl,
                     Price = p.Price,
+                    CategoryId = p.Category.Id,
                 }).FirstAsync();
 
         }
@@ -57,7 +58,7 @@ namespace trendify.Core.Services
                 Description = p.Description,
                 ImageUrl = p.ImageUrl,
                 Price = p.Price,
-                Category = p.Category.Name,
+                CategoryId = p.Category.Id,
 
             }).ToListAsync();
         }

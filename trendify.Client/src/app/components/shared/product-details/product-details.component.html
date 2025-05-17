@@ -12,7 +12,11 @@
       <!-- Product Details -->
       <div class="col-md-7 p-4">
         <h2 class="fw-bold text-uppercase mb-2">{{ product?.name }}</h2>
-        <p class="text-muted mb-1"><strong>Category:</strong> {{ product?.category }}</p>
+        @for (item of categories; track $index) {
+          @if(item.id == product?.categoryId){
+            <p class="text-muted mb-1"><strong>Category:</strong> {{ item.name }}</p>
+          }
+        }
         <p class="text-muted mb-3"><strong>Price:</strong> ${{ product?.price }}</p>
         <p class="mb-4">{{ product?.description }}</p>
 

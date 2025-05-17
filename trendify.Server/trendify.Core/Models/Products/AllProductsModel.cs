@@ -12,7 +12,7 @@
 
         public decimal Price { get; set; }
 
-        public string Category { get; set; } = null!;
+        public int CategoryId { get; set; }
 
         public bool IsOnSale { get; set; } = false;
 

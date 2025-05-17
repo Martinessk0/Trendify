@@ -1,5 +1,5 @@
 export class CategoryModel {
-  id!: string;
+  id!: number;
   name!: string;
 
   constructor(init?: Partial<CategoryModel>) {

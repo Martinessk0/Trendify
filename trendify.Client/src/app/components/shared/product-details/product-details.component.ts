@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../services/cart-service';
 import Swal from 'sweetalert2';
+import { CategoryService } from '../../../services/category-service';
+import { CategoryModel } from '../../../models/category-model';
 
 @Component({
   selector: 'app-product-details',
@@ -17,12 +19,18 @@ export class ProductDetailsComponent implements OnInit {
   private id?: string | null;
   loading = true;
   error!: string;
+  categories: CategoryModel[] = [];
 
   constructor(
     public productService: ProductService,
     private route: ActivatedRoute,
-    public cartService: CartService
-  ) {}
+    public cartService: CartService,
+    private cs: CategoryService
+  ) {
+    cs.getAllCategories().subscribe(res => {
+      this.categories = res;
+    })
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -52,7 +60,7 @@ export class ProductDetailsComponent implements OnInit {
       Swal.fire('Error', 'Invalid product ID', 'error');
       return;
     }
-  
+
     this.cartService.addToCart(this.product.id, 1).subscribe({
       next: () => {
         Swal.fire({
@@ -68,6 +76,6 @@ export class ProductDetailsComponent implements OnInit {
       }
     });
   }
-  
-  
+
+
 }

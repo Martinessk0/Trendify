@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using trendify.Infrastructure.Data.Entities;
 
 namespace trendify.Core.Models.Products
@@ -14,7 +12,7 @@ namespace trendify.Core.Models.Products
 
         public decimal Price { get; set; }
 
-        public string Category { get; set; } = null!;
+        public int CategoryId { get; set; }
 
         public bool IsOnSale { get; set; } = false;
 

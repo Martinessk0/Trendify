@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using trendify.Infrastructure.Data.Entities;
-
-namespace trendify.Core.Models.Products
+﻿namespace trendify.Core.Models.Products
 {
     public class AllProductsModel
     {

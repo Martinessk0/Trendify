@@ -23,9 +23,10 @@
               <!-- Category -->
               <div class="form-group mb-3">
                 <label for="category"><i class="bi bi-tags"></i> Category</label>
-                <select id="category" class="form-select" formControlName="category">
-                  <option value="">-- Select Category --</option>
-                  <option *ngFor="let c of categories" [value]="c.name">{{ c.name }}</option>
+                <select id="category" class="form-select" formControlName="categoryId">
+                  @for(c of categories; track c.id){
+                  <option [ngValue]="c.id">{{c.name}}</option>
+                  }
                 </select>
               </div>
 
@@ -86,7 +87,10 @@
   <button type="button" class="btn btn-secondary me-2" (click)="cancel()">
     Close
   </button>
-  <button *ngIf="!isViewMode" type="button" class="btn btn-primary" (click)="save()">
+  @if (!isViewMode) {
+  <button type="button" class="btn btn-primary" (click)="save()">
     Save
   </button>
+  }
+
 </mat-dialog-actions>

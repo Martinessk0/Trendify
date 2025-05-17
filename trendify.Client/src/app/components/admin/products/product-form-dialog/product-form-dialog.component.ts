@@ -26,8 +26,6 @@ export interface ProductDialogData {
     MatInputModule,
     MatCheckboxModule,
     MatButtonModule,
-    NgFor,
-    NgIf
   ],
   templateUrl: './product-form-dialog.component.html',
   styleUrl: './product-form-dialog.component.scss'
@@ -45,7 +43,7 @@ export class ProductFormDialogComponent {
   ) {
     this.form = this.fb.group({
       name: [{ value: data.model.name, disabled: data.action === FormActions.VIEW }, Validators.required],
-      category: [{ value: data.model.category, disabled: data.action === FormActions.VIEW }],
+      categoryId: [{ value: data.model.categoryId, disabled: data.action === FormActions.VIEW }],
       description: [{ value: data.model.description, disabled: data.action === FormActions.VIEW }],
       price: [{ value: data.model.price, disabled: data.action === FormActions.VIEW }, [Validators.required, Validators.min(0)]],
       imageUrl: [{ value: data.model.imageUrl, disabled: data.action === FormActions.VIEW }],
@@ -53,7 +51,7 @@ export class ProductFormDialogComponent {
       isItNew: [{ value: data.model.isItNew ?? false, disabled: data.action === FormActions.VIEW }],
       isFeatured: [{ value: data.model.isFeatured ?? false, disabled: data.action === FormActions.VIEW }],
     });
-
+    console.log('data: ',this.data);
 
     this.loadCategories();
   }
@@ -71,7 +69,7 @@ export class ProductFormDialogComponent {
 
 
   save() {
-    console.log('Save clicked, form valid:', this.form);
+    console.log('form: ',this.form);
     if (this.form.valid) {
       this.dialogRef.close({ model: new ProductModel(this.form.value) });
     }

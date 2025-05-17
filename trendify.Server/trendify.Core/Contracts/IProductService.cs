@@ -15,7 +15,7 @@ namespace trendify.Core.Contracts
 
         public Task<Product> CreateProduct(CreateProductDto model);
 
-        Task<Product> UpdateProduct(int id, CreateProductDto model);
+        Task<Product> EditProduct(int id, CreateProductDto model);
 
         Task<bool> DeleteProduct(int id);
 

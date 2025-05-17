@@ -65,7 +65,7 @@ namespace trendify.Core.Services
         public async Task<Product> CreateProduct(CreateProductDto model)
         {
             var category = await repo.AllReadonly<Category>()
-                                     .FirstOrDefaultAsync(c => c.Name == model.Category);
+                                     .FirstOrDefaultAsync(c => c.Id == model.CategoryId);
 
             if (category == null)
             {
@@ -94,7 +94,7 @@ namespace trendify.Core.Services
         }
 
 
-        public async Task<Product> UpdateProduct(int id, CreateProductDto model)
+        public async Task<Product>  EditProduct(int id, CreateProductDto model)
         {
             var product = await repo.GetByIdAsync<Product>(id);
 
@@ -104,11 +104,12 @@ namespace trendify.Core.Services
             }
 
             var category = await repo.AllReadonly<Category>()
-                                     .FirstOrDefaultAsync(c => c.Name == model.Category);
+                                     .FirstOrDefaultAsync(c => c.Id == model.CategoryId);
+
 
             if (category == null)
             {
-                throw new ArgumentException("Category not found");
+                throw new ArgumentException($"Category not found {model.CategoryId}");
             }
 
             product.Name = model.Name;

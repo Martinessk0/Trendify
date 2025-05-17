@@ -115,6 +115,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result?.model) {
+        console.log("result: ",result.model);
         this.productService.updateProduct(+model.id, result.model).subscribe({
           next: (updatedProduct) => {
             this.dataSource.data = this.dataSource.data.map((p) =>

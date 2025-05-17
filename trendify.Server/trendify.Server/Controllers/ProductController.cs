@@ -48,9 +48,9 @@ namespace trendify.Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<Product> Update(int id, [FromBody] CreateProductDto model)
+        public async Task<Product> Edit(int id, [FromBody] CreateProductDto model)
         {
-            var result = await _productService.UpdateProduct(id, model);
+            var result = await _productService.EditProduct(id, model);
             return result;
         }
 

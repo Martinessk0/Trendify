@@ -15,25 +15,23 @@ import { CategoryModel } from '../../../models/category-model';
   styleUrl: './product-details.component.scss',
 })
 export class ProductDetailsComponent implements OnInit {
-  public product?: ProductModel;
-  private id?: string | null;
+  product?: ProductModel;
   loading = true;
-  error!: string;
+  error = '';
   categories: CategoryModel[] = [];
 
   constructor(
-    public productService: ProductService,
+    private productService: ProductService,
     private route: ActivatedRoute,
-    public cartService: CartService,
+    private cartService: CartService,
     private cs: CategoryService
   ) {
-    cs.getAllCategories().subscribe(res => {
-      this.categories = res;
-    })
+    // preload categories
+    this.cs.getAllCategories().subscribe(res => this.categories = res);
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (!id) {
         this.error = 'No product ID provided.';
@@ -42,26 +40,26 @@ export class ProductDetailsComponent implements OnInit {
       }
 
       this.productService.getProductById(id).subscribe({
-        next: (res) => {
+        next: res => {
           this.product = res;
           this.loading = false;
         },
-        error: (err) => {
-          console.error(err);
+        error: () => {
           this.error = 'Could not load product.';
           this.loading = false;
-        },
+        }
       });
     });
   }
 
   addToCart(): void {
-    if (!this.product?.id) {
-      Swal.fire('Error', 'Invalid product ID', 'error');
+    if (!this.product) {
+      Swal.fire('Error', 'Invalid product.', 'error');
       return;
     }
 
-    this.cartService.addToCart(this.product.id, 1).subscribe({
+    // assuming your CartService signature is addItem(productId: number, quantity?: number)
+    this.cartService.addItem({productId: +this.product.id,quantity: 1}).subscribe({
       next: () => {
         Swal.fire({
           title: 'Added to Cart!',
@@ -70,12 +68,9 @@ export class ProductDetailsComponent implements OnInit {
           confirmButtonText: 'OK'
         });
       },
-      error: (err) => {
-        console.error(err);
+      error: () => {
         Swal.fire('Failed', 'Could not add product to cart. Please try again.', 'error');
       }
     });
   }
-
-
 }

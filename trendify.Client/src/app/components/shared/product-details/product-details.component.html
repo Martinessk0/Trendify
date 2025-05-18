@@ -1,30 +1,48 @@
-<div class="container my-5">
-  <div class="card shadow-lg border-0">
-    <div class="row g-0 align-items-center">
-      <!-- Product Image -->
-      <div class="col-md-5 text-center p-4 bg-light">
-        <img [src]="product?.imageUrl"
-             [alt]="product?.name"
-             class="img-fluid rounded"
-             style="max-height: 300px; object-fit: contain;">
-      </div>
+<div class="container my-5" *ngIf="!loading; else loadingTpl">
+  <ng-container *ngIf="product; else errorTpl">
+    <div class="card shadow-lg border-0">
+      <div class="row g-0 align-items-center">
+        <!-- Image -->
+        <div class="col-md-5 text-center p-4 bg-light">
+          <img
+            [src]="product.imageUrl"
+            [alt]="product.name"
+            class="img-fluid rounded"
+            style="max-height: 300px; object-fit: contain;"
+          />
+        </div>
 
-      <!-- Product Details -->
-      <div class="col-md-7 p-4">
-        <h2 class="fw-bold text-uppercase mb-2">{{ product?.name }}</h2>
-        @for (item of categories; track $index) {
-          @if(item.id == product?.categoryId){
-            <p class="text-muted mb-1"><strong>Category:</strong> {{ item.name }}</p>
-          }
-        }
-        <p class="text-muted mb-3"><strong>Price:</strong> ${{ product?.price }}</p>
-        <p class="mb-4">{{ product?.description }}</p>
+        <!-- Details -->
+        <div class="col-md-7 p-4">
+          <h2 class="fw-bold text-uppercase mb-2">{{ product.name }}</h2>
 
-        <!-- Action Button -->
-        <button class="btn btn-lg btn-primary px-4" (click)="addToCart()">
-          <i class="bi bi-cart-plus me-2"></i> Add to Cart
-        </button>
+          <!-- Category -->
+          <p class="text-muted mb-1" *ngFor="let cat of categories" >
+            <ng-container *ngIf="cat.id === product.categoryId">
+              <strong>Category:</strong> {{ cat.name }}
+            </ng-container>
+          </p>
+
+          <p class="text-muted mb-3"><strong>Price:</strong> {{ product.price | currency }}</p>
+          <p class="mb-4">{{ product.description }}</p>
+
+          <!-- Action -->
+          <button class="btn btn-lg btn-primary px-4" (click)="addToCart()">
+            <i class="bi bi-cart-plus me-2"></i> Add to Cart
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>
+
+<ng-template #loadingTpl>
+  <div class="text-center my-5">
+    <div class="spinner-border"></div>
+    <p>Loading product…</p>
+  </div>
+</ng-template>
+
+<ng-template #errorTpl>
+  <div class="alert alert-danger my-5">{{ error }}</div>
+</ng-template>

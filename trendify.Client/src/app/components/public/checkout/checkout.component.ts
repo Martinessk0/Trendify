@@ -1,16 +1,14 @@
-import { Component } from '@angular/core';
-import {
-  Validators,
-  FormBuilder,
-  ReactiveFormsModule,
-  FormGroup,
-} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CartService } from '../../../services/cart-service';
 import { OrderService } from '../../../services/order-service';
-import { CommonModule } from '@angular/common';
-import { CartItem } from '../cart/cart.component';
+import { CartItemModel } from '../../../models/cart/cartItem-model';
+import { CreateOrderModel } from '../../../models/order/createOrder-model';
+import { ShoppingCartModel } from '../../../models/cart/shoppingCart-model';
+
 
 @Component({
   selector: 'app-checkout',
@@ -18,49 +16,50 @@ import { CartItem } from '../cart/cart.component';
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss',
 })
-export class CheckoutComponent {
-  form: FormGroup;
-  cartItems: CartItem[] = [];
+export class CheckoutComponent  implements OnInit {
+  form!: FormGroup;
+  cart?: ShoppingCartModel;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
-    private orderService: OrderService,
     private cartService: CartService,
+    private orderService: OrderService,
     private router: Router
-  ) {
-    this.form = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.cartService.getCart().subscribe(items => {
-      this.cartItems = items;
+    this.form = this.fb.group({
+      email:    ['', [Validators.required, Validators.email]],
+      fullName: ['', Validators.required],
+      phone:    ['', Validators.required],
+      address:  ['', Validators.required]
     });
+
+    this.cartService.getCart().subscribe(c => this.cart = c);
   }
 
   getTotal(): number {
-    return this.cartItems.reduce((sum, item) => sum + item.quantity * item.product.price, 0);
+    return this.cart?.items
+      .reduce((sum, i) => sum + i.price * i.quantity, 0) ?? 0;
   }
 
   submit(): void {
-    if (this.form.invalid || this.cartItems.length === 0) {
-      Swal.fire('Error', 'Please complete all fields and make sure your cart is not empty.', 'warning');
-      return;
-    }
+    if (this.form.invalid || !this.cart) return;
+    this.loading = true;
+    const dto: CreateOrderModel = {
+      email:            this.form.value.email,
+      fullName:         this.form.value.fullName,
+      phoneNumber:      this.form.value.phone,
+      deliveryAddressId: 1,
+    };
 
-    const { name, address } = this.form.value;
-
-    this.orderService.placeOrder(name!, address!).subscribe({
-      next: res => {
-        Swal.fire('Success', 'Order placed successfully!', 'success');
-        this.cartService.clearCart(); // ако имаш такава логика
-        this.router.navigate(['/']); // или към /orders
+    this.orderService.createOrder(dto).subscribe({
+      next: order => {
+        Swal.fire('Успешно', `Поръчка #${order.orderNumber} създадена.`, 'success');
+        this.router.navigate(['/orders', order.id]);
       },
-      error: () => {
-        Swal.fire('Error', 'Failed to place the order. Try again.', 'error');
-      }
-    });
+      error: () => Swal.fire('Грешка', 'Не може да създам поръчката.', 'error')
+    }).add(() => this.loading = false);
   }
 }

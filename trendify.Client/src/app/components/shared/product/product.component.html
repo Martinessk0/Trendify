@@ -15,7 +15,6 @@
   </div>
 
   <div class="card-body d-flex flex-column">
-    <!-- TODO -->
     @for (c of categories; track $index) {
       @if(product.categoryId == c.id){
       <h6 class="text-uppercase text-muted mb-2 small">{{c.name}}</h6>

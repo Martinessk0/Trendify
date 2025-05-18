@@ -15,14 +15,14 @@ export class OrdersComponent implements OnInit {
   constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
-    this.orderService.getUserOrders().subscribe({
-      next: (data) => {
-        this.orders = data;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-      }
-    });
+    // this.orderService.getUserOrders().subscribe({
+    //   next: (data) => {
+    //     this.orders = data;
+    //     this.loading = false;
+    //   },
+    //   error: () => {
+    //     this.loading = false;
+    //   }
+    // });
   }
 }

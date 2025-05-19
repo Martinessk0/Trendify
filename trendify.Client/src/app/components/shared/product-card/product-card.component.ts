@@ -7,13 +7,13 @@ import { CategoryService } from '../../../services/category-service';
 import { CategoryModel } from '../../../models/category-model';
 
 @Component({
-  selector: 'app-product',
+  selector: 'app-product-card',
   imports: [CommonModule,RouterLink],
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.scss',
+  templateUrl: './product-card.component.html',
+  styleUrl: './product-card.component.scss',
   providers: [HttpClient]
 })
-export class ProductComponent {
+export class ProductCardComponent {
   @Input() product!: ProductModel;
     categories: CategoryModel[] = [];
 

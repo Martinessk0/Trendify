@@ -14,9 +14,6 @@ export class ProductModel {
   constructor(init?: Partial<ProductModel>) {
     if (init) {
       Object.assign(this, init);
-      // if (init.category) {
-      //   this.category = new CategoryModel(init.category);
-      // }
     }
   }
 }

@@ -22,9 +22,10 @@
               <strong>Category:</strong> {{ cat.name }}
             </ng-container>
           </p>
-
-          <p class="text-muted mb-3"><strong>Price:</strong> {{ product.price | currency }}</p>
-          <p class="mb-4">{{ product.description }}</p>
+          
+          <p class="text-success mb-3"><strong>Price:</strong> {{ product.price | currency }}</p>
+          <strong>Description:</strong>
+          <p>{{ product.description }}</p>
 
           <!-- Action -->
           <button class="btn btn-lg btn-primary px-4" (click)="addToCart()">

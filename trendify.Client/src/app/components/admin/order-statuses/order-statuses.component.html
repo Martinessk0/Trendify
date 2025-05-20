@@ -40,21 +40,21 @@
                         <button
                           mat-icon-button
                           color="primary"
-                          
+                          (click)="show(row)"
                         >
                           <mat-icon>visibility</mat-icon>
                         </button>
                         <button
                           mat-icon-button
                           color="primary"
-                        
+                          (click)="edit(row)"
                         >
                           <mat-icon>edit</mat-icon>
                         </button>
                         <button
                           mat-icon-button
                           color="primary"
-                        
+                          (click)="delete(row.id)"
                         >
                           <mat-icon>delete</mat-icon>
                         </button>

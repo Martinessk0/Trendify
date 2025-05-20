@@ -44,24 +44,50 @@ namespace trendify.Core.Services
 
         public async Task AddToCartAsync(string userId, int productId, int quantity)
         {
-            // load or create cart
+            // 1) Try to load the existing, active cart
             var cart = await repo.All<ShoppingCart>()
                                  .Include(c => c.CartProducts)
-                                 .FirstOrDefaultAsync(c => c.BuyerId == userId && c.IsActive)
-                       ?? new ShoppingCart(userId);
+                                 .FirstOrDefaultAsync(c => c.BuyerId == userId && c.IsActive);
 
-            if (cart.Id == 0)
+            // 2) If none exists, create AND immediately save it
+            if (cart == null)
+            {
+                cart = new ShoppingCart(userId);
                 await repo.AddAsync(cart);
+                await repo.SaveChangesAsync();   // ← now EF has assigned cart.Id and is tracking it
+            }
 
-            // load product
+            // 3) Load the product
             var product = await repo.GetByIdAsync<Product>(productId)
                          ?? throw new ArgumentException("Product not found");
 
+            // 4) Add your item
             cart.AddItem(product, quantity);
 
-            repo.Update(cart);
+            // 5) Finally persist the new line-item
             await repo.SaveChangesAsync();
         }
+
+        //public async Task AddToCartAsync(string userId, int productId, int quantity)
+        //{
+        //    // load or create cart
+        //    var cart = await repo.All<ShoppingCart>()
+        //                         .Include(c => c.CartProducts)
+        //                         .FirstOrDefaultAsync(c => c.BuyerId == userId && c.IsActive)
+        //               ?? new ShoppingCart(userId);
+
+        //    if (cart.Id == 0)
+        //        await repo.AddAsync(cart);
+
+        //    // load product
+        //    var product = await repo.GetByIdAsync<Product>(productId)
+        //                 ?? throw new ArgumentException("Product not found");
+
+        //    cart.AddItem(product, quantity);
+
+        //    repo.Update(cart);
+        //    await repo.SaveChangesAsync();
+        //}
 
         public async Task UpdateCartItemAsync(string userId, int cartItemId, int quantity)
         {

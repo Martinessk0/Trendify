@@ -1,0 +1,62 @@
+<div class="container my-5">
+  <h2 class="mb-4">Your Cart</h2>
+  <ul class="list-group">
+    @for (product of cartItems; track $index) {
+    <app-cart-item [item]="product" [readonly]="true"></app-cart-item>
+    }
+  </ul>
+
+  <h4 class="text-end mb-4">Total: {{ cartTotal | currency:"BGN" }}</h4>
+
+  <h2 class="mb-3">Checkout</h2>
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <div class="col-md-6">
+      <label for="email" class="form-label">Email*</label>
+      <input id="email" formControlName="email" type="email" class="form-control"
+        [class.is-invalid]="checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched">
+      <div class="invalid-feedback">Valid email is required.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="fullName" class="form-label">Full Name*</label>
+      <input id="fullName" formControlName="fullName" class="form-control"
+        [class.is-invalid]="checkoutForm.get('fullName')?.invalid && checkoutForm.get('fullName')?.touched">
+      <div class="invalid-feedback">Full name is required.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="phoneNumber" class="form-label">Phone*</label>
+      <input id="phoneNumber" formControlName="phoneNumber" class="form-control"
+        [class.is-invalid]="checkoutForm.get('phoneNumber')?.invalid && checkoutForm.get('phoneNumber')?.touched">
+      <div class="invalid-feedback">Phone number is required.</div>
+    </div>
+    <div formGroupName="address" class="col-12">
+      <h5>Shipping Address</h5>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="streetAddress" class="form-label">Street*</label>
+          <input id="streetAddress" formControlName="streetAddress" class="form-control"
+            [class.is-invalid]="checkoutForm.get('address.streetAddress')?.invalid && checkoutForm.get('address.streetAddress')?.touched">
+          <div class="invalid-feedback">Street address is required.</div>
+        </div>
+        <div class="col-md-3">
+          <label for="zipCode" class="form-label">ZIP*</label>
+          <input id="zipCode" formControlName="zipCode" class="form-control"
+            [class.is-invalid]="checkoutForm.get('address.zipCode')?.invalid && checkoutForm.get('address.zipCode')?.touched">
+          <div class="invalid-feedback">ZIP code is required.</div>
+        </div>
+        <div class="col-md-3">
+          <label for="city" class="form-label">City*</label>
+          <input id="city" formControlName="city" class="form-control"
+            [class.is-invalid]="checkoutForm.get('address.city')?.invalid && checkoutForm.get('address.city')?.touched">
+          <div class="invalid-feedback">City is required.</div>
+        </div>
+        <div class="col-12">
+          <label for="recipientName" class="form-label">Recipient Name (optional)</label>
+          <input id="recipientName" formControlName="name" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="col-12 text-end mb-5">
+      <button type="submit" class="btn btn-primary btn-lg" [disabled]="isSubmitting">Place Order</button>
+    </div>
+  </form>
+</div>

@@ -38,7 +38,7 @@
             <li><a class="dropdown-item" [routerLink]="['/']">Settings</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item" [routerLink]="['/heroes']">Logout</a>
+              <a class="dropdown-item" (click)="logout()">Logout</a>
             </li>
           </ul>
         </li>

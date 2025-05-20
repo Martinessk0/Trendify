@@ -9,7 +9,7 @@ import { AuthService } from '../../../services/auth-service';
   styleUrl: './nav.component.scss'
 })
 export class NavComponent {
-  constructor(public authService: AuthService,
+  constructor(private authService: AuthService,
     public router: Router
   ) { }
 

@@ -4,6 +4,7 @@ import { LayoutComponent } from "../components/admin/layout/layout.component";
 import { ProductsComponent } from "../components/admin/products/products.component";
 import { CategoriesComponent } from "../components/admin/categories/categories.component";
 import { UsersComponent } from "../components/admin/users/users.component";
+import { OrderStatusesComponent } from "../components/admin/order-statuses/order-statuses.component";
 
 export const adminRoutes: Routes = [
   {
@@ -30,6 +31,10 @@ export const adminRoutes: Routes = [
       {
         path: 'users',
         component: UsersComponent
+      },
+      {
+        path: 'order-statuses',
+        component: OrderStatusesComponent
       }
     ],
   },

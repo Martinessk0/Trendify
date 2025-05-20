@@ -65,7 +65,7 @@ namespace trendify.Core.Services
 
         public async Task<List<OrderStatusesDto>> GetAllStatuses()
         {
-            return await repo.AllReadonly<OrderStatus>().Select(c => new OrderStatusesDto()
+            return await repo.AllReadonly<OrderStatus>().Where(p => p.IsActive).Select(c => new OrderStatusesDto()
             {
                 Id = c.Id,
                 Name = c.Name,

@@ -64,7 +64,7 @@ namespace trendify.Core.Services
 
         public async Task<List<CategoryDto>> GetAllCategories()
         {
-            return await repo.AllReadonly<Category>().Select(c => new CategoryDto()
+            return await repo.AllReadonly<Category>().Where(p => p.IsActive).Select(c => new CategoryDto()
             {
                 Id = c.Id,
                 Name = c.Name,

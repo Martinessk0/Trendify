@@ -15,4 +15,9 @@ export class UserService {
   getAllUser(): Observable<ProfileModel[]> {
     return this.http.get<ProfileModel[]>(`${this.apiUrl}/account`);
   }
+
+  getTotalUserCount() {
+    return this.http.get<number>(`${this.apiUrl}/account/totalCount`)
+  }
+
 }

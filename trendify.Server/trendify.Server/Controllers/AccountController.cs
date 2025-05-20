@@ -204,7 +204,11 @@ namespace trendify.Server.Controllers
             return Ok(list);
         }
 
-
+        [HttpGet("totalCount")]
+        public async Task<int> TotalCount()
+        {
+            return await _userManager.Users.CountAsync();
+        }
 
     }
 }

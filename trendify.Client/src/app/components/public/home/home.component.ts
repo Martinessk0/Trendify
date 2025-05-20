@@ -4,10 +4,11 @@ import { ProductModel } from '../../../models/product-model';
 import { ProductService } from '../../../services/product-service';
 import { CategoryModel } from '../../../models/category-model';
 import { CategoryService } from '../../../services/category-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [ProductCardComponent],
+  imports: [ProductCardComponent,RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

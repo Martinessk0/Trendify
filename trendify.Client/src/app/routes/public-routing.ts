@@ -10,6 +10,7 @@ import { RegisterComponent } from '../components/public/account/register/registe
 import { CartComponent } from '../components/public/cart/cart.component';
 import { CheckoutComponent } from '../components/public/checkout/checkout.component';
 import { OrdersComponent } from '../components/public/orders/orders.component';
+import { loginGuard } from '../guards/login-guard';
 
 export const publicRoutes: Routes = [
   {
@@ -36,15 +37,17 @@ export const publicRoutes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
-        canActivate: [authGuard],
+        canActivate: [loginGuard], 
       },
       {
         path: 'cart',
-        component: CartComponent
+        component: CartComponent,
+        canActivate: [loginGuard], 
       },
       {
         path: 'checkout',
-        component: CheckoutComponent
+        component: CheckoutComponent,
+        canActivate: [loginGuard], 
       },
       {
         path: 'shop',
@@ -52,7 +55,8 @@ export const publicRoutes: Routes = [
       },
       {
         path: 'orders',
-        component: OrdersComponent      
+        component: OrdersComponent,  
+        canActivate: [loginGuard], 
       },
       {
         path: 'product/details/:id',

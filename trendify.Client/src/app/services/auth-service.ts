@@ -48,20 +48,6 @@ export class AuthService {
         return false;
     }
 
-    // getUserDetail = () => {
-    //     const token = this.getToken();
-    //     if (!token) return undefined;
-    //     const decodedToken: any = jwtDecode(token);
-    //     const userDetail = {
-    //         id: decodedToken.nameid,
-    //         fullName: decodedToken.name,
-    //         email: decodedToken.email,
-    //         roles: decodedToken.role || [],
-    //     };
-
-    //     return userDetail;
-    // };
-
     getProfile(): Observable<ProfileModel> {
         return this.http.get<ProfileModel>(`${this.apiUrl}/account/detail`);
     }

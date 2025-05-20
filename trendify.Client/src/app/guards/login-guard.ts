@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { AuthService } from '../services/auth-service';
 import Swal from 'sweetalert2';
 
-export const authGuard: CanActivateFn = async (route, state) => {
+export const loginGuard: CanActivateFn = async (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
@@ -12,11 +12,13 @@ export const authGuard: CanActivateFn = async (route, state) => {
   }
 
   await Swal.fire({
-    icon: 'error',
-    title: 'Access Denied',
+    icon: 'warning',
+    title: 'Login Required',
     text: 'You must be logged in to access this page.',
     confirmButtonText: 'OK'
   });
 
-  return router.createUrlTree(['/login']);
+  return router.createUrlTree(['/login'], {
+    queryParams: { returnUrl: state.url }
+  });
 };

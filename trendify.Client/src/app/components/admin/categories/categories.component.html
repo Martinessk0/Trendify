@@ -11,7 +11,7 @@
           <h1 class="h2">Categories</h1>
         </div>
         <div class="d-flex flex-row-reverse mb-2">
-          <button mat-button mat-flat-button class="bg-secondary">
+          <button mat-button mat-flat-button class="bg-secondary" (click)="create()">
             Create new product 
           </button>
         </div>
@@ -40,21 +40,21 @@
                         <button
                           mat-icon-button
                           color="primary"
-                  
+                          (click)="show(row)"
                         >
                           <mat-icon>visibility</mat-icon>
                         </button>
                         <button
                           mat-icon-button
                           color="primary"
-                  
+                          (click)="edit(row)"
                         >
                           <mat-icon>edit</mat-icon>
                         </button>
                         <button
                           mat-icon-button
                           color="primary"
-                        
+                          (click)="delete(row.id)"
                         >
                           <mat-icon>delete</mat-icon>
                         </button>

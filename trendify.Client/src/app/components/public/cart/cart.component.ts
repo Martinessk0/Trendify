@@ -16,6 +16,7 @@ import { RouterLink } from '@angular/router';
 export class CartComponent implements OnInit {
   cart?: ShoppingCartModel;
   loading = true;
+  totalPrice = 0;
 
   constructor(private cartService: CartService) {}
 
@@ -28,6 +29,10 @@ export class CartComponent implements OnInit {
     this.cartService.getCart().subscribe(cart => {
       this.cart = cart;
       this.loading = false;
+      this.totalPrice = 0;
+      cart.items.forEach(el => {
+        this.totalPrice += el.price * el.quantity;
+      });
     });
   }
 

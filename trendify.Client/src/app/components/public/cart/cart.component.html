@@ -17,7 +17,7 @@
           <img [src]="i.imageUrl" width="60" height="60" style="object-fit: contain;" />
           <div>
             <h5 class="mb-1">{{ i.productName }}</h5>
-            <small class="text-muted">{{ i.price | currency }}</small>
+            <small class="text-muted">{{ i.price | currency:'BGN' }}</small>
           </div>
         </div>
 
@@ -39,6 +39,10 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <h5 class="text-success">Total Price: {{totalPrice | currency:'BGN'}}</h5>
     </div>
 
     <!-- Action buttons -->

@@ -13,12 +13,12 @@
       <tr *ngFor="let i of cart?.items">
         <td><img [src]="i.imageUrl" width="60"></td>
         <td>{{ i.productName }}</td>
-        <td>{{ i.price | currency }}</td>
+        <td>{{ i.price | currency:'BGN' }}</td>
         <td>{{ i.quantity }}</td>
-        <td>{{ (i.price * i.quantity) | currency }}</td>
+        <td>{{ (i.price * i.quantity) | currency:'BGN' }}</td>
       </tr>
     </table>
-    <h5 class="text-end">Общо: {{ getTotal() | currency }}</h5>
+    <h5 class="text-end">Общо: {{ getTotal() | currency:'BGN' }}</h5>
 
     <!-- формата -->
     <form [formGroup]="form" (ngSubmit)="submit()">

@@ -15,10 +15,9 @@ export const loginGuard: CanActivateFn = async (route, state) => {
     icon: 'warning',
     title: 'Login Required',
     text: 'You must be logged in to access this page.',
-    confirmButtonText: 'OK'
   });
 
   return router.createUrlTree(['/login'], {
-    queryParams: { returnUrl: state.url }
+    queryParams: { returnUrl: state.url } 
   });
 };

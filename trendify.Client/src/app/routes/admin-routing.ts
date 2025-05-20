@@ -3,6 +3,7 @@ import { HomeComponent } from "../components/admin/home/home.component";
 import { LayoutComponent } from "../components/admin/layout/layout.component";
 import { ProductsComponent } from "../components/admin/products/products.component";
 import { CategoriesComponent } from "../components/admin/categories/categories.component";
+import { UsersComponent } from "../components/admin/users/users.component";
 
 export const adminRoutes: Routes = [
   {
@@ -25,6 +26,10 @@ export const adminRoutes: Routes = [
       {
         path: 'categories',
         component: CategoriesComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
       }
     ],
   },

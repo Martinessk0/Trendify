@@ -13,5 +13,8 @@ namespace trendify.Infrastructure.Data.Entities
         public string Name { get; set; } = null!;
 
         public List<Order> Orders { get; set; } = new List<Order>();
+
+        [Required]
+        public bool IsActive { get; set; } = true;
     }
 }

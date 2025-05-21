@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using trendify.Core.Contracts;
 using trendify.Core.Models.Orders;
+using trendify.Core.Services;
 using trendify.Infrastructure.Data.Entities;
 
 namespace trendify.Server.Controllers
@@ -41,6 +42,12 @@ namespace trendify.Server.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
             return Ok(await _orderService.GetOrderByIdAsync(userId, id));
+        }
+
+        [HttpGet("totalCount")]
+        public async Task<int> TotalCount()
+        {
+            return await _orderService.TotalOrders();
         }
     }
 

@@ -1,9 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-9 mt-4 ms-sm-auto col-lg-10 px-md-4 offset-md-2 pt-5">
-      <div
-        class="d-flex mt-4 justify-content-between flex-wrap flex-md-nowrap align-items-center mb-4"
-      >
+      <div class="d-flex mt-4 justify-content-between flex-wrap flex-md-nowrap align-items-center mb-4">
         <h1 class="h2">Dashboard</h1>
       </div>
 
@@ -13,7 +11,11 @@
           <div class="card text-bg-secondary h-100">
             <div class="card-body">
               <h5 class="card-title">Total Products</h5>
-              <p class="card-text display-6">{{ totalProducts }}</p>
+              <p class="card-text display-6">
+                <ng-container *ngIf="!isLoadingProducts; else loading">
+                  {{ totalProducts }}
+                </ng-container>
+              </p>
             </div>
           </div>
         </div>
@@ -21,7 +23,11 @@
           <div class="card text-bg-success h-100">
             <div class="card-body">
               <h5 class="card-title">New Orders</h5>
-              <p class="card-text display-6">53</p>
+              <p class="card-text display-6">
+                <ng-container *ngIf="!isLoadingOrders; else loading">
+                  {{ totalOrders }}
+                </ng-container>
+              </p>
             </div>
           </div>
         </div>
@@ -37,7 +43,11 @@
           <div class="card text-bg-danger h-100">
             <div class="card-body">
               <h5 class="card-title">Customers</h5>
-              <p class="card-text display-6">{{totalCustomers}}</p>
+              <p class="card-text display-6">
+                <ng-container *ngIf="!isLoadingCustomers; else loading">
+                  {{ totalCustomers }}
+                </ng-container>
+              </p>
             </div>
           </div>
         </div>
@@ -114,3 +124,10 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #loading>
+  <div class="spinner-border spinner-border-sm text-light" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</ng-template>

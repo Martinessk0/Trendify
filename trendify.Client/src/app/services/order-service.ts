@@ -18,4 +18,8 @@ export class OrderService {
   list(): Observable<OrderSummaryModel[]> {
     return this.http.get<OrderSummaryModel[]>(this.api);
   }
+
+  getTotalCount() {
+    return this.http.get<number>(`${this.api}/totalCount`)
+  }
 }

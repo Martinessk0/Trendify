@@ -116,5 +116,11 @@ namespace trendify.Core.Services
                       })
                       .ToListAsync();
         }
+
+        public async Task<int> TotalOrders()
+        {
+            return await repo.AllReadonly<Order>().CountAsync();
+        }
+
     }
 }

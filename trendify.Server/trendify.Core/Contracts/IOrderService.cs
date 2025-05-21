@@ -7,5 +7,7 @@ namespace trendify.Core.Contracts
         Task<int> CreateOrderAsync(string userId, CreateOrderModel dto);
         Task<List<OrderSummaryModelModel>> GetOrdersByUserAsync(string userId);
         Task<OrderDetailsModel> GetOrderByIdAsync(string userId, int orderId);
+
+        public Task<int> TotalOrders();
     }
 }

@@ -3,13 +3,16 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ProductService } from '../../../services/product-service';
 import { UserService } from '../../../services/user-service';
+import { OrderService } from '../../../services/order-service';
+import { finalize } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 /**
  * @title Table with pagination
  */
 @Component({
   selector: 'app-home',
-  imports: [MatTableModule, MatPaginatorModule],
+  imports: [MatTableModule, MatPaginatorModule,CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -19,21 +22,30 @@ export class HomeComponent implements AfterViewInit {
 
   totalProducts: number = 0;
   totalCustomers: number = 0;
+  totalOrders: number = 0;
+
+  isLoadingProducts = true;
+  isLoadingCustomers = true;
+  isLoadingOrders = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(
+   constructor(
     private productService: ProductService,
     private userService: UserService,
+    private orderService: OrderService,
   ) {
-    productService.getTotalCount().subscribe(res => {
-      this.totalProducts = res;
-      console.log(this.totalProducts);
-    });
-    userService.getTotalUserCount().subscribe(res => {
-      this.totalCustomers = res;
-      console.log(this.totalProducts);
-    });
+    this.productService.getTotalCount()
+      .pipe(finalize(() => this.isLoadingProducts = false))
+      .subscribe(count => this.totalProducts = count);
+
+    this.userService.getTotalUserCount()
+      .pipe(finalize(() => this.isLoadingCustomers = false))
+      .subscribe(count => this.totalCustomers = count);
+
+    this.orderService.getTotalCount()
+      .pipe(finalize(() => this.isLoadingOrders = false))
+      .subscribe(count => this.totalOrders = count);
   }
 
   ngAfterViewInit() {

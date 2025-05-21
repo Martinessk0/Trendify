@@ -103,18 +103,20 @@ namespace trendify.Core.Services
 
         public async Task<List<OrderSummaryModelModel>> GetOrdersByUserAsync(string userId)
         {
-            return await repo.AllReadonly<Order>()
+            var orders = await repo.AllReadonly<Order>()
                       .Where(o => o.BuyerId == userId)
                       .Include(o => o.OrderStatus)
-                      .Select(o => new OrderSummaryModelModel
-                      {
-                          Id = o.Id,
-                          OrderNumber = o.OrderNumber,
-                          OrderDate = o.OrderDate,
-                          Total = o.TotalOrderPrice(),
-                          Status = o.OrderStatus.Name
-                      })
+                      .Include(o => o.Products)        
                       .ToListAsync();
+
+            return orders.Select(o => new OrderSummaryModelModel
+            {
+                Id = o.Id,
+                OrderNumber = o.OrderNumber,
+                OrderDate = o.OrderDate,
+                Status = o.OrderStatus.Name,
+                Total = o.TotalOrderPrice()
+            }).ToList();
         }
 
         public async Task<int> TotalOrders()

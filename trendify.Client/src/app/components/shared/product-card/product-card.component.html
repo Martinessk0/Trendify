@@ -10,13 +10,11 @@
     <img
       [src]="product.imageUrl"
       class="object-fit-contain rounded-start"
+      [routerLink]="['/product/details', product.id]" 
+      style="cursor: pointer;"
       alt="{{ product.name }}"
     >
   </div>
-  <!-- <div class="ratio ratio-4x3">
-    <img [src]="product.imageUrl" [routerLink]="['/product/details', product.id]" style="cursor: pointer;" class="card-img-top object-fit-cover"
-      [alt]="product.name" />
-  </div> -->
 
   <div class="card-body d-flex flex-column">
     <h5 class="card-title mb-1" [routerLink]="['/product/details', product.id]" style="cursor: pointer;">{{ product.name
@@ -31,9 +29,6 @@
       <span class="h5 text-success mb-2">
         {{ product.price | currency:'BGN' }}
       </span>
-      <!-- <a [routerLink]="['/product/details', product.id]" class="btn btn-outline-secondary btn-sm">
-        Details
-      </a> -->
     </div>
     <button class="btn btn-lg btn-outline-primary px-4" (click)="addToCart()">
       <i class="bi bi-cart-plus me-2"></i> Add to Cart

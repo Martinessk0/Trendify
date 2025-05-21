@@ -1,4 +1,9 @@
-<div class="container my-5" *ngIf="!loading; else loadingTpl">
+<div class="container my-4" *ngIf="!loading; else loadingTpl">
+  <div class="mb-4">
+    <a [routerLink]="['/shop']" class="text-decoration-none">
+      <i class="bi bi-arrow-left-circle me-1"></i> All products
+    </a>
+  </div>
   <ng-container *ngIf="product; else errorTpl">
     <div class="card shadow-lg border-0">
       <div class="row g-0 align-items-center">

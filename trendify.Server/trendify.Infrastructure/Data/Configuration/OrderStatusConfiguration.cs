@@ -42,7 +42,7 @@ namespace trendify.Infrastructure.Data.Configuration
             status = new OrderStatus()
             {
                 Id = 4,
-                Name = "Canceled"
+                Name = "Cancelled"
             };
 
             statuses.Add(status);

@@ -41,8 +41,8 @@
                   [ngClass]="{
                     'bg-secondary': o.status === 'Pending',
                     'bg-success': o.status === 'Completed',
-                    'bg-warning text-dark': o.status === 'Processing',
-                    'bg-danger': o.status === 'Cancelled'
+                    'bg-warning text-dark': o.status === 'In Progress',
+                    'text-bg-danger': o.status === 'Cancelled'
                   }">
               {{ o.status }}
             </span>

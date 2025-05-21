@@ -6,10 +6,17 @@
     <span *ngIf="product.isItNew" class="badge bg-success text-white"> New </span>
   </div>
 
-  <div class="ratio ratio-4x3">
+  <div class="ratio ratio-1x1">
+    <img
+      [src]="product.imageUrl"
+      class="object-fit-contain rounded-start"
+      alt="{{ product.name }}"
+    >
+  </div>
+  <!-- <div class="ratio ratio-4x3">
     <img [src]="product.imageUrl" [routerLink]="['/product/details', product.id]" style="cursor: pointer;" class="card-img-top object-fit-cover"
       [alt]="product.name" />
-  </div>
+  </div> -->
 
   <div class="card-body d-flex flex-column">
     <h5 class="card-title mb-1" [routerLink]="['/product/details', product.id]" style="cursor: pointer;">{{ product.name

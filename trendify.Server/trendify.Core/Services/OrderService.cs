@@ -101,7 +101,7 @@ namespace trendify.Core.Services
             };
         }
 
-        public async Task<List<OrderSummaryModelModel>> GetOrdersByUserAsync(string userId)
+        public async Task<List<OrderSummaryModel>> GetOrdersByUserAsync(string userId)
         {
             var orders = await repo.AllReadonly<Order>()
                       .Where(o => o.BuyerId == userId)
@@ -109,7 +109,7 @@ namespace trendify.Core.Services
                       .Include(o => o.Products)        
                       .ToListAsync();
 
-            return orders.Select(o => new OrderSummaryModelModel
+            return orders.Select(o => new OrderSummaryModel
             {
                 Id = o.Id,
                 OrderNumber = o.OrderNumber,
@@ -118,6 +118,28 @@ namespace trendify.Core.Services
                 Total = o.TotalOrderPrice()
             }).ToList();
         }
+
+        // Core/Services/OrderService.cs
+        public async Task<List<OrderSummaryModel>> GetRecentOrdersByUserAsync(string userId, int count)
+        {
+            var orders = await repo.AllReadonly<Order>()
+                //.Where(o => o.BuyerId == userId)
+                .Include(o => o.OrderStatus)
+                .Include(o => o.Products)
+                .OrderByDescending(o => o.OrderDate)
+                .Take(count)
+                .ToListAsync();
+
+            return orders.Select(o => new OrderSummaryModel
+            {
+                Id = o.Id,
+                OrderNumber = o.OrderNumber,
+                OrderDate = o.OrderDate,
+                Status = o.OrderStatus.Name,
+                Total = o.TotalOrderPrice()
+            }).ToList();
+        }
+
 
         public async Task<int> TotalOrders()
         {

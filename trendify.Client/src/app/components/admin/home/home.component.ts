@@ -6,13 +6,14 @@ import { UserService } from '../../../services/user-service';
 import { OrderService } from '../../../services/order-service';
 import { finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { RecentOrdersComponent } from "../recent-orders/recent-orders.component";
 
 /**
  * @title Table with pagination
  */
 @Component({
   selector: 'app-home',
-  imports: [MatTableModule, MatPaginatorModule,CommonModule],
+  imports: [MatTableModule, MatPaginatorModule, CommonModule, RecentOrdersComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

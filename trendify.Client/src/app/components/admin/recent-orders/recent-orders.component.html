@@ -1,0 +1,45 @@
+<table class="table table-hover align-middle">
+  <thead class="table-light">
+    <tr>
+      <th>Order ID</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- loading state -->
+    <tr *ngIf="isLoadingRecent">
+      <td colspan="5" class="text-center py-4">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </td>
+    </tr>
+  
+    <!-- no orders -->
+    <tr *ngIf="!isLoadingRecent && recentOrders.length === 0">
+      <td colspan="5" class="text-center">Няма поръчки</td>
+    </tr>
+  
+    <!-- recent orders -->
+    <tr *ngFor="let o of recentOrders">
+      <td>#{{ o.orderNumber }}</td>
+      <td>{{ o.orderDate | date:'yyyy-MM-dd' }}</td>
+      <td>
+        <span
+          class="badge"
+          [ngClass]="{
+            'bg-secondary': o.status === 'Pending',
+            'bg-success': o.status === 'Completed',
+            'bg-warning text-dark': o.status === 'In Progress',
+            'bg-danger': o.status === 'Cancelled'
+          }"
+        >
+          {{ o.status }}
+        </span>
+      </td>
+      <td>{{ o.total | currency:'BGN':'symbol':'1.2-2' }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -23,7 +23,7 @@ namespace trendify.Core.Models.Orders
 // Core/Models/Orders/OrderSummaryModelModel.cs
 namespace trendify.Core.Models.Orders
 {
-    public class OrderSummaryModelModel
+    public class OrderSummaryModel
     {
         public int Id { get; set; }
         public string OrderNumber { get; set; } = null!;
@@ -36,7 +36,7 @@ namespace trendify.Core.Models.Orders
 // Core/Models/Orders/OrderDetailsModel.cs
 namespace trendify.Core.Models.Orders
 {
-    public class OrderDetailsModel : OrderSummaryModelModel
+    public class OrderDetailsModel : OrderSummaryModel
     {
         public List<CartItemModel> Items { get; set; } = new();
         public DeliveryAddressModel Address { get; set; } = null!;

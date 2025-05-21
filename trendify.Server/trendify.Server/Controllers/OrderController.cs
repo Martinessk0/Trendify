@@ -30,7 +30,7 @@ namespace trendify.Server.Controllers
 
         // GET api/order
         [HttpGet]
-        public async Task<ActionResult<List<OrderSummaryModelModel>>> GetAll()
+        public async Task<ActionResult<List<OrderSummaryModel>>> GetAll()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
             return Ok(await _orderService.GetOrdersByUserAsync(userId));
@@ -43,6 +43,16 @@ namespace trendify.Server.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
             return Ok(await _orderService.GetOrderByIdAsync(userId, id));
         }
+
+        // Server/Controllers/OrderController.cs
+        [HttpGet("recent")]
+        public async Task<ActionResult<List<OrderSummaryModel>>> GetRecent([FromQuery] int count = 10)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+            var recent = await _orderService.GetRecentOrdersByUserAsync(userId, count);
+            return Ok(recent);
+        }
+
 
         [HttpGet("totalCount")]
         public async Task<int> TotalCount()

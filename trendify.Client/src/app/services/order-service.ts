@@ -24,6 +24,10 @@ export class OrderService {
     return this.http.get<OrderDetailsModel>(`${this.api}/${id}`);
   }
 
+  getRecent(count: number): Observable<OrderSummaryModel[]> {
+    return this.http.get<OrderSummaryModel[]>(`${this.api}/recent?count=${count}`);
+  }
+
   getTotalCount() {
     return this.http.get<number>(`${this.api}/totalCount`)
   }

@@ -1,0 +1,17 @@
+<div class="card" [ngClass]="['text-bg-' + bgClass, 'h-100']">
+    <div class="card-body">
+      <h5 class="card-title">{{ title }}</h5>
+      <p class="card-text display-6">
+        <ng-container *ngIf="!isLoading; else loading">
+          {{ value }}
+        </ng-container>
+      </p>
+    </div>
+  </div>
+  
+  <ng-template #loading>
+    <div class="spinner-border spinner-border-sm text-light" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </ng-template>
+  

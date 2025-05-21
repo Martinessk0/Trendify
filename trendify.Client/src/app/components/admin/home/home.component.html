@@ -8,55 +8,38 @@
       </div>
 
       <div class="row mb-4">
-        <!-- KPI Cards -->
         <div class="col-sm-6 col-lg-3 mb-3">
-          <div class="card text-bg-secondary h-100">
-            <div class="card-body">
-              <h5 class="card-title">Total Products</h5>
-              <p class="card-text display-6">
-                <ng-container *ngIf="!isLoadingProducts; else loading">
-                  {{ totalProducts }}
-                </ng-container>
-              </p>
-            </div>
-          </div>
+          <app-dashboard-card
+            title="Total Products"
+            [value]="totalProducts"
+            [isLoading]="isLoadingProducts"
+            bgClass="info"
+          ></app-dashboard-card>
         </div>
         <div class="col-sm-6 col-lg-3 mb-3">
-          <div class="card text-bg-success h-100">
-            <div class="card-body">
-              <h5 class="card-title">Total Orders</h5>
-              <p class="card-text display-6">
-                <ng-container *ngIf="!isLoadingOrders; else loading">
-                  {{ totalOrders }}
-                </ng-container>
-              </p>
-            </div>
-          </div>
+          <app-dashboard-card
+            title="Total Orders"
+            [value]="totalOrders"
+            [isLoading]="isLoadingOrders"
+            bgClass="success"
+          ></app-dashboard-card>
         </div>
         <div class="col-sm-6 col-lg-3 mb-3">
-          <div class="card text-bg-warning h-100">
-            <div class="card-body">
-              <h5 class="card-title">Revenue</h5>
-              <p class="card-text display-6">
-                <ng-container *ngIf="!isLoadingRevenue; else loading">
-                  {{ totalRevenue | currency : "BGN" }}
-                </ng-container>
-              </p>
-            </div>
-          </div>
+          <app-dashboard-card
+            title="Revenue"
+            [value]="totalRevenue | currency : 'BGN'"
+            [isLoading]="isLoadingRevenue"
+            bgClass="warning"
+          ></app-dashboard-card>
         </div>
         <div class="col-sm-6 col-lg-3 mb-3">
-          <div class="card text-bg-danger h-100">
-            <div class="card-body">
-              <h5 class="card-title">Customers</h5>
-              <p class="card-text display-6">
-                <ng-container *ngIf="!isLoadingCustomers; else loading">
-                  {{ totalCustomers }}
-                </ng-container>
-              </p>
-            </div>
-          </div>
-        </div>
+          <app-dashboard-card
+            title="Customers"
+            [value]="totalCustomers"
+            [isLoading]="isLoadingCustomers"
+            bgClass="danger"
+          ></app-dashboard-card>
+        </div>       
       </div>
 
       <div class="card">

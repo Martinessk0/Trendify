@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { CreateOrderModel } from '../models/order/create-order-model';
 import { OrderSummaryModel } from '../models/order/order-summary-model';
+import { OrderDetailsModel } from '../models/order/order-details-model';
 
 @Injectable({ providedIn: 'root' })
 export class OrderService {
@@ -17,6 +18,10 @@ export class OrderService {
 
   list(): Observable<OrderSummaryModel[]> {
     return this.http.get<OrderSummaryModel[]>(this.api);
+  }
+
+  getById(id: number): Observable<OrderDetailsModel> {
+    return this.http.get<OrderDetailsModel>(`${this.api}/${id}`);
   }
 
   getTotalCount() {

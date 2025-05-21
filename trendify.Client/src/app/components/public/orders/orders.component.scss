@@ -1,0 +1,54 @@
+// orders.component.scss
+
+.order-card {
+    border: none;
+    border-radius: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    }
+  
+    .card-header {
+      background: linear-gradient(135deg, #6f42c1, #d63384);
+      color: #fff;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+  
+      .order-number {
+        font-weight: 600;
+        font-size: 1rem;
+      }
+  
+      .status-badge {
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        padding: 0.4em 0.6em;
+        border-radius: 0.75rem;
+      }
+    }
+  
+    .card-body {
+      padding: 1.25rem;
+  
+      .card-text,
+      .card-title {
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+  
+        i {
+          margin-right: 0.5rem;
+          font-size: 1.1rem;
+        }
+      }
+    }
+  
+    .card-footer {
+      background: transparent;
+      border-top: none;
+    }
+  }
+  

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../services/order-service';
 import { CommonModule } from '@angular/common';
 import { OrderSummaryModel } from '../../../models/order/order-summary-model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
 })

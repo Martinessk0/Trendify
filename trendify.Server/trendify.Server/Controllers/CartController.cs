@@ -57,9 +57,17 @@ namespace trendify.Server.Controllers
         [HttpDelete("clear")]
         public async Task<ActionResult> ClearCart()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
             await _cartService.ClearCartAsync(userId);
             return NoContent();
+        }
+
+        [HttpGet("itemsCount")]
+        public async Task<int> TotalItemsInCart()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+            var count = await _cartService.TotalItemsInCart(userId);
+            return count;
         }
     }
 }

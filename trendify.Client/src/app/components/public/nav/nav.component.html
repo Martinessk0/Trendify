@@ -31,9 +31,11 @@
       @if (isLoggedIn()) {
       <a [routerLink]="['/cart']" class="position-relative me-3 text-white">
         <i class="bi bi-cart" style="font-size: 1.25rem;"></i>
-        <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-          3
-        </span> -->
+        @if(cartCount$ | async; as count){
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{count}}
+          </span>
+        }
       </a>
 
 
@@ -43,7 +45,7 @@
         <ul class="dropdown-menu dropdown-menu-end">
           <li><a class="dropdown-item" [routerLink]="['/profile']">Profile</a></li>
           <li><a class="dropdown-item" [routerLink]="['/orders']">Orders</a></li>
-          @if(authService.isAdmin()) {
+          @if(isAdmin) {
             <li><a class="dropdown-item" [routerLink]="['/admin/home']">Administration</a></li>
           }
           <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>

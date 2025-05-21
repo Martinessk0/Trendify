@@ -133,5 +133,16 @@ namespace trendify.Core.Services
 
             await repo.SaveChangesAsync();
         }
+
+        public async Task<int> TotalItemsInCart(string userId)
+        {
+            var cart = await repo.All<ShoppingCart>()
+                                .Include(c => c.CartProducts)
+                                .FirstOrDefaultAsync(c => c.BuyerId == userId && c.IsActive);
+
+            if (cart == null) return -1;
+
+            return cart.CartProducts.Count();
+        }
     }
 }

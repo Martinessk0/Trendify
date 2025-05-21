@@ -24,10 +24,12 @@ export class HomeComponent implements AfterViewInit {
   totalProducts: number = 0;
   totalCustomers: number = 0;
   totalOrders: number = 0;
+  totalRevenue: number = 0;
 
   isLoadingProducts = true;
   isLoadingCustomers = true;
   isLoadingOrders = true;
+  isLoadingRevenue = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -47,6 +49,9 @@ export class HomeComponent implements AfterViewInit {
     this.orderService.getTotalCount()
       .pipe(finalize(() => this.isLoadingOrders = false))
       .subscribe(count => this.totalOrders = count);
+      this.orderService.getRevenue()
+      .pipe(finalize(() => this.isLoadingRevenue = false))
+      .subscribe(count => this.totalRevenue = count);
   }
 
   ngAfterViewInit() {

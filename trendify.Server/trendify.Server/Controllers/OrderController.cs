@@ -48,9 +48,14 @@ namespace trendify.Server.Controllers
         [HttpGet("recent")]
         public async Task<ActionResult<List<OrderSummaryModel>>> GetRecent([FromQuery] int count = 10)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
-            var recent = await _orderService.GetRecentOrdersByUserAsync(userId, count);
+            var recent = await _orderService.GetRecentOrdersByUserAsync(count);
             return Ok(recent);
+        }
+
+        [HttpGet("revenue")]
+        public async Task<decimal> Revenue()
+        {
+            return await _orderService.TotalRevenue();
         }
 
 

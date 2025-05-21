@@ -28,6 +28,10 @@ export class OrderService {
     return this.http.get<OrderSummaryModel[]>(`${this.api}/recent?count=${count}`);
   }
 
+  getRevenue() {
+    return this.http.get<number>(`${this.api}/revenue`)
+  }
+
   getTotalCount() {
     return this.http.get<number>(`${this.api}/totalCount`)
   }

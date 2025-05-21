@@ -20,7 +20,7 @@ namespace trendify.Server.Controllers
 
         // POST api/order
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] CreateOrderDto dto)
+        public async Task<ActionResult<int>> Create([FromBody] CreateOrderModel dto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
             var orderId = await _orderService.CreateOrderAsync(userId, dto);
@@ -29,7 +29,7 @@ namespace trendify.Server.Controllers
 
         // GET api/order
         [HttpGet]
-        public async Task<ActionResult<List<OrderSummaryModel>>> GetAll()
+        public async Task<ActionResult<List<OrderSummaryModelModel>>> GetAll()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
             return Ok(await _orderService.GetOrdersByUserAsync(userId));

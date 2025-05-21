@@ -1,8 +1,8 @@
 export class DeliveryAddressModel {
-    name!: string;
     streetAddress!: string;
-    city!: string;
     zipCode!: string;
+    city!: string;
+    name?: string;
 
     constructor(init?: Partial<DeliveryAddressModel>) {
         if (init) {

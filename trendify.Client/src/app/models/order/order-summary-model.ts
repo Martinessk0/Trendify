@@ -5,9 +5,10 @@ export class OrderSummaryModel {
     total!: number;
     status!: string;
 
-    constructor(init?: Partial<OrderSummaryModel>) {
-        if (init) {
-            Object.assign(this, init);
-        }
+constructor(init ?: Partial<OrderSummaryModel>) {
+    if (init) {
+        Object.assign(this, init);
     }
+}
+
 }

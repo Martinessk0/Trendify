@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { OrderService, CreateOrderDto } from '../../../services/order-service';
+import { OrderService } from '../../../services/order-service';
 import { CartService } from '../../../services/cart-service';
 import { ShoppingCartModel } from '../../../models/cart/shoppingCart-model';
 import Swal from 'sweetalert2';
 import { CartItemModel } from '../../../models/cart/cartItem-model';
 import { CartItemComponent } from "../cart/cart-item/cart-item.component";
+import { CreateOrderModel } from '../../../models/order/create-order-model';
 
 @Component({
   selector: 'app-checkout',
@@ -60,7 +61,7 @@ export class CheckoutComponent implements OnInit {
     const dto = {
       ...this.checkoutForm.value,
       items: this.cartItems.map(({ productId, quantity }) => ({ productId, quantity }))
-    } as CreateOrderDto;
+    } as CreateOrderModel;
 
     this.orders.create(dto).subscribe({
       next: orderId => {

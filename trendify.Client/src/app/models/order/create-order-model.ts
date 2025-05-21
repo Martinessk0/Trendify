@@ -1,8 +1,10 @@
+import { DeliveryAddressModel } from "./delivery-address-model";
+
 export class CreateOrderModel {
     email!: string;
     fullName!: string;
     phoneNumber!: string;
-    deliveryAddressId!: number;
+    address!: DeliveryAddressModel;
 
     constructor(init?: Partial<CreateOrderModel>) {
         if (init) {
@@ -10,3 +12,5 @@ export class CreateOrderModel {
         }
     }
 }
+
+

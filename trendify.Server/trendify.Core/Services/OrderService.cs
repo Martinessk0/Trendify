@@ -13,7 +13,7 @@ namespace trendify.Core.Services
         private readonly IRepository repo;
         public OrderService(IRepository repo) => this.repo = repo;
 
-        public async Task<int> CreateOrderAsync(string userId, CreateOrderDto dto)
+        public async Task<int> CreateOrderAsync(string userId, CreateOrderModel dto)
         {
             var cart = await repo.All<ShoppingCart>()
                      .Include(c => c.CartProducts)
@@ -39,9 +39,12 @@ namespace trendify.Core.Services
                 PhoneNumber = dto.PhoneNumber,
                 Products = cart.CartProducts,
                 DeliveryAddressId = address.Id,
-                OrderStatusId = 1,            // e.g. “Pending”
-                OrderNumber = Guid.NewGuid().ToString().Substring(0, 8).ToUpper()
+                OrderStatusId = 1,
+                OrderNumber = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(),
+
             };
+
+            //order.Price = order.TotalOrderPrice();
 
             await repo.AddAsync(order);
 
@@ -79,7 +82,7 @@ namespace trendify.Core.Services
                 OrderDate = o.OrderDate,
                 Total = o.TotalOrderPrice(),
                 Status = o.OrderStatus.Name,
-                Address = new DeliveryAddressDto
+                Address = new DeliveryAddressModel
                 {
                     StreetAddress = o.DeliveryAddress.StreetAddress,
                     ZipCode = o.DeliveryAddress.ZipCode,
@@ -98,12 +101,12 @@ namespace trendify.Core.Services
             };
         }
 
-        public async Task<List<OrderSummaryModel>> GetOrdersByUserAsync(string userId)
+        public async Task<List<OrderSummaryModelModel>> GetOrdersByUserAsync(string userId)
         {
             return await repo.AllReadonly<Order>()
                       .Where(o => o.BuyerId == userId)
                       .Include(o => o.OrderStatus)
-                      .Select(o => new OrderSummaryModel
+                      .Select(o => new OrderSummaryModelModel
                       {
                           Id = o.Id,
                           OrderNumber = o.OrderNumber,

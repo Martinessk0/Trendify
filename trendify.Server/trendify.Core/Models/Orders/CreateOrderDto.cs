@@ -1,17 +1,17 @@
-﻿// Core/Models/Orders/CreateOrderDto.cs
+﻿// Core/Models/Orders/CreateOrderModel.cs
 using trendify.Core.Models.Cart;
 
 namespace trendify.Core.Models.Orders
 {
-    public class CreateOrderDto
+    public class CreateOrderModel
     {
         public string Email { get; set; } = null!;
         public string FullName { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
-        public DeliveryAddressDto Address { get; set; } = null!;
+        public DeliveryAddressModel Address { get; set; } = null!;
     }
 
-    public class DeliveryAddressDto
+    public class DeliveryAddressModel
     {
         public string StreetAddress { get; set; } = null!;
         public string ZipCode { get; set; } = null!;
@@ -20,10 +20,10 @@ namespace trendify.Core.Models.Orders
     }
 }
 
-// Core/Models/Orders/OrderSummaryModel.cs
+// Core/Models/Orders/OrderSummaryModelModel.cs
 namespace trendify.Core.Models.Orders
 {
-    public class OrderSummaryModel
+    public class OrderSummaryModelModel
     {
         public int Id { get; set; }
         public string OrderNumber { get; set; } = null!;
@@ -36,9 +36,9 @@ namespace trendify.Core.Models.Orders
 // Core/Models/Orders/OrderDetailsModel.cs
 namespace trendify.Core.Models.Orders
 {
-    public class OrderDetailsModel : OrderSummaryModel
+    public class OrderDetailsModel : OrderSummaryModelModel
     {
         public List<CartItemModel> Items { get; set; } = new();
-        public DeliveryAddressDto Address { get; set; } = null!;
+        public DeliveryAddressModel Address { get; set; } = null!;
     }
 }

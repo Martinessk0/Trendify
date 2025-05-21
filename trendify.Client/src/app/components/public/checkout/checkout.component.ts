@@ -73,7 +73,7 @@ export class CheckoutComponent implements OnInit {
         }).then(result => {
           if (result.isConfirmed) {
             this.cart.clearCart().subscribe(() => {
-              this.router.navigate(['/cart']);
+              this.router.navigate(['/orders']);
             });
           }
         });

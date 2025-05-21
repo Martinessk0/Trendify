@@ -48,9 +48,9 @@
     </div>
   </div>
 
-  <div class="row row-cols-1 row-cols-md-2 gx-4 gy-5 align-items-stretch">
+  <div class="row row-cols-1 row-cols-md-2 align-items-stretch">
     <ng-container *ngFor="let item of order.items">
-      <div class="col">
+      <div class="col mb-5">
         <app-order-detail-card [item]="item"></app-order-detail-card>
       </div>
     </ng-container>

@@ -13,6 +13,8 @@ import { OrdersComponent } from '../components/public/orders/orders.component';
 import { loginGuard } from '../guards/login-guard';
 import { OrderDetailComponent } from '../components/public/order-detail/order-detail.component';
 import { AboutUsComponent } from '../components/public/about-us/about-us.component';
+import { TermsOfServiceComponent } from '../components/public/terms-of-service/terms-of-service.component';
+import { PrivacyPolicyComponent } from '../components/public/privacy-policy/privacy-policy.component';
 
 export const publicRoutes: Routes = [
   {
@@ -66,12 +68,20 @@ export const publicRoutes: Routes = [
         canActivate: [loginGuard], 
       },
       {
+        path: 'product/details/:id',
+        component: ProductDetailsComponent,
+      },
+      {
         path: 'about-us',
         component: AboutUsComponent
       },
       {
-        path: 'product/details/:id',
-        component: ProductDetailsComponent,
+        path: 'privacy-policy',
+        component: PrivacyPolicyComponent
+      },
+      {
+        path: 'terms-of-service',
+        component: TermsOfServiceComponent
       },
     ],
   },

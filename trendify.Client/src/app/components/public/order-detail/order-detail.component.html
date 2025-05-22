@@ -1,6 +1,3 @@
-<!-- order-details.component.html -->
-
-<!-- Order exists -->
 <div class="container my-4" *ngIf="order">
   <div class="mb-4">
     <a routerLink="/orders" class="text-decoration-none">
@@ -8,9 +5,7 @@
     </a>
   </div>
 
-  <!-- Order summary + Delivery address side-by-side on md+ -->
   <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
-    <!-- Order summary -->
     <div class="col">
       <div class="card h-100 border-1 rounded-4">
         <div class="card-header">
@@ -45,7 +40,6 @@
       </div>
     </div>
 
-    <!-- Delivery address -->
     <div class="col">
       <div class="card h-100 border-1 rounded-4">
         <div class="card-header">
@@ -60,11 +54,9 @@
     </div>
   </div>
 
-  <!-- Divider + Heading -->
   <hr class="my-4">
   <h5 class="mb-3">Order items</h5>
 
-  <!-- Items grid: 1-col on xs, 2-cols on md+ -->
   <div class="row row-cols-1 row-cols-md-2 align-items-stretch">
     <ng-container *ngFor="let item of order.items">
       <div class="col mb-5">
@@ -74,14 +66,12 @@
   </div>
 </div>
 
-<!-- Loading state -->
 <div class="container my-5 text-center" *ngIf="loading">
   <div class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
 </div>
 
-<!-- Error state -->
 <div class="container my-5" *ngIf="error">
   <div class="alert alert-danger">{{ error }}</div>
 </div>

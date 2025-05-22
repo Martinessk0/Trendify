@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { OrderService } from '../../../services/order-service';
 import { CartService } from '../../../services/cart-service';
 import { ShoppingCartModel } from '../../../models/cart/shoppingCart-model';
@@ -13,7 +13,7 @@ import { CreateOrderModel } from '../../../models/order/create-order-model';
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CartItemComponent],
+  imports: [CommonModule, ReactiveFormsModule, CartItemComponent,RouterLink],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss'],
 })

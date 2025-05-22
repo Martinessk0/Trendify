@@ -12,6 +12,7 @@ import { CheckoutComponent } from '../components/public/checkout/checkout.compon
 import { OrdersComponent } from '../components/public/orders/orders.component';
 import { loginGuard } from '../guards/login-guard';
 import { OrderDetailComponent } from '../components/public/order-detail/order-detail.component';
+import { AboutUsComponent } from '../components/public/about-us/about-us.component';
 
 export const publicRoutes: Routes = [
   {
@@ -63,6 +64,10 @@ export const publicRoutes: Routes = [
         path: 'orders/:id',
         component: OrderDetailComponent ,  
         canActivate: [loginGuard], 
+      },
+      {
+        path: 'about-us',
+        component: AboutUsComponent
       },
       {
         path: 'product/details/:id',

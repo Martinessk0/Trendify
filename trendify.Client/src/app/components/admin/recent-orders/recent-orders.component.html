@@ -30,7 +30,7 @@
         <span
           class="badge"
           [ngClass]="{
-            'bg-secondary': o.status === 'Pending',
+            'bg-info': o.status === 'Pending',
             'bg-success': o.status === 'Completed',
             'bg-warning text-dark': o.status === 'In Progress',
             'bg-danger': o.status === 'Cancelled'

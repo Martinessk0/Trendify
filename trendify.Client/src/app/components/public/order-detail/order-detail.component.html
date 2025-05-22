@@ -19,7 +19,7 @@
         <span
           class="badge"
           [ngClass]="{
-            'bg-secondary': order.status === 'Pending',
+            'bg-info': order.status === 'Pending',
             'bg-success': order.status === 'Completed',
             'bg-warning text-dark': order.status === 'In Progress',
             'bg-danger': order.status === 'Cancelled'
@@ -38,7 +38,7 @@
   </div>
 
   <div class="card mb-4 shadow-sm border-0">
-    <div class="card-header bg-light">
+    <div class="card-header">
       <h5 class="mb-0"><i class="bi bi-geo-alt me-2"></i>Delivery address</h5>
     </div>
     <div class="card-body">

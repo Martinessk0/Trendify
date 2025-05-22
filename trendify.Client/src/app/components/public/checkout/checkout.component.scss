@@ -1,0 +1,8 @@
+.btn-gradient-primary {
+    background: linear-gradient(135deg, #0062E6 0%, #33AEFF 100%);
+    border: none;
+    color: #fff;
+  }
+  .btn-gradient-primary:hover {
+    filter: brightness(1.1);
+  }

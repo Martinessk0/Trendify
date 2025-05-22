@@ -1,37 +1,59 @@
 <div class="container py-5">
+  <!-- loading spinner -->
   <div *ngIf="loading" class="text-center">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
 
+  <!-- cart content -->
   <div *ngIf="!loading && cart">
     <h2 class="mb-4 fw-bold text-center">🛒 Your Cart</h2>
 
     <div class="list-group">
-      @for (product of cart.items; track $index) {
-      <app-cart-item [item]="product" (qtyChange)="changeQty(product, $event)"
-        (remove)="remove(product)"></app-cart-item>
-      }
-      @if(cart.items.length === 0){
-      <div class="list-group-item list-group-item-light py-3 px-4 d-flex flex-column flex-md-row
-         align-items-md-center justify-content-between border rounded mb-3 shadow-sm">
-        <div class="text-center">
-          <p class="h6 text-muted">Your cart is empty.</p>
-        </div>
+      <!-- items -->
+      <ng-container *ngFor="let product of cart.items; let i = index">
+        <app-cart-item
+          [item]="product"
+          (qtyChange)="changeQty(product, $event)"
+          (remove)="remove(product)"
+          class="mb-3"
+        ></app-cart-item>
+      </ng-container>
+
+      <!-- empty -->
+      <div
+        *ngIf="cart.items.length === 0"
+        class="list-group-item list-group-item-light py-4 px-3 d-flex justify-content-center border rounded shadow-sm"
+      >
+        <p class="h6 text-muted mb-0">Your cart is empty.</p>
       </div>
-      }
     </div>
 
-    <div class="d-flex justify-content-end">
-      <h5 class="text-success">Total Price: {{totalPrice | currency:'BGN'}}</h5>
+    <!-- total -->
+    <div class="d-flex justify-content-end mt-4">
+      <h5 class="text-success fw-bold mb-0">
+        Total Price:
+        {{ totalPrice | currency : "BGN" }}
+      </h5>
     </div>
 
-    <div class="d-flex justify-content-between mt-4">
-      <button (click)="clear()" [disabled]="cart.items.length === 0" class="btn btn-secondary">
+    <!-- actions: stack on xs, inline on sm+ -->
+    <div
+      class="d-flex flex-column flex-sm-row justify-content-between gap-2 mt-3"
+    >
+      <button
+        (click)="clear()"
+        [disabled]="cart.items.length === 0"
+        class="btn btn-danger w-100 w-sm-auto"
+      >
         <i class="bi bi-trash3"></i> Clear Cart
       </button>
-      <button [routerLink]="['/checkout']" [disabled]="cart.items.length === 0" class="btn btn-success">
+      <button
+        [routerLink]="['/checkout']"
+        [disabled]="cart.items.length === 0"
+        class="btn btn-success w-100 w-sm-auto"
+      >
         <i class="bi bi-cart-check"></i> Checkout
       </button>
     </div>

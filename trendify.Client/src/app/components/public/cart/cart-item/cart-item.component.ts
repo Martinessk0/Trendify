@@ -13,14 +13,16 @@ export class CartItemComponent {
   @Input() readonly = false;
 
   @Output() qtyChange = new EventEmitter<number>();
-  @Output() remove    = new EventEmitter<void>();
+  @Output('remove') private removeEvent = new EventEmitter<void>();
 
-  onQtyChange(event: Event) {
-    const value = +(event.target as HTMLInputElement).value;
-    if (value > 0) this.qtyChange.emit(value);
+  changeQty(item: CartItemModel, newQty: number) {
+    if (newQty < 1) {
+      this.removeEvent.emit();
+    } else {
+      this.qtyChange.emit(newQty);
+    }
   }
-
-  onRemove() {
-    this.remove.emit();
+  remove(item: CartItemModel) {
+    this.removeEvent.emit();
   }
 }

@@ -1,43 +1,80 @@
+<!-- app-cart-item.component.html -->
 <div
-  class="list-group-item list-group-item-light py-3 px-4 d-flex flex-column flex-md-row
-         align-items-md-center justify-content-between border rounded mb-3 shadow-sm"
+  class="d-flex flex-row align-items-center flex-wrap
+             bg-white rounded shadow-sm
+             border-start border-4 border-primary
+             p-3 mb-3"
 >
-  <div class="d-flex align-items-center gap-3 mb-3 mb-md-0">
-    <img [src]="item.imageUrl"
-         width="60" height="60"
-         style="object-fit: contain;" />
-    <div>
+  <!-- Left: thumbnail + title + unit price -->
+  <div class="d-flex align-items-center flex-shrink-0 me-3">
+    <img
+      [src]="item.imageUrl"
+      width="60"
+      height="60"
+      class="rounded object-fit-contain"
+      alt="{{ item.productName }}"
+    />
+    <div class="ms-3">
       <h5 class="mb-1">{{ item.productName }}</h5>
       <small class="text-muted">{{ item.price | currency:'BGN' }}</small>
     </div>
   </div>
 
+  <!-- Right: editable or static -->
   <ng-container *ngIf="!readonly; else staticView">
-    <div class="d-flex flex-column flex-sm-row align-items-center gap-2">
-      <div class="d-flex align-items-center">
-        <label class="me-2 mb-0">Qty:</label>
+    <div class="d-flex align-items-center ms-auto gap-2">
+      <!-- Qty spinner -->
+      <div
+        class="input-group input-group-sm"
+        style="width:100px; min-width:100px; max-width:120px;"
+      >
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+          (click)="changeQty(item, item.quantity - 1)"
+        >
+          <i class="bi bi-dash-lg"></i>
+        </button>
         <input
-          type="number"
-          min="1"
-          class="form-control form-control-sm"
-          style="width: 70px;"
+          type="text"
+          class="form-control text-center"
           [value]="item.quantity"
-          (change)="onQtyChange($event)"
+          readonly
         />
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+          (click)="changeQty(item, item.quantity + 1)"
+        >
+          <i class="bi bi-plus-lg"></i>
+        </button>
       </div>
 
-      <button (click)="onRemove()"
-              class="btn btn-sm btn-outline-danger">
-        <i class="bi bi-x-lg"></i> Remove
+      <!-- Subtotal -->
+      <div class="fw-semibold text-success">
+        {{ (item.price * item.quantity) | currency:'BGN' }}
+      </div>
+
+      <!-- Remove -->
+      <button
+        class="btn btn-outline-danger btn-sm"
+        (click)="remove(item)"
+        aria-label="Remove item"
+      >
+        <i class="bi bi-trash-fill"></i>
       </button>
     </div>
   </ng-container>
 
+  <!-- Static fallback -->
   <ng-template #staticView>
-    <h5 class="me-2 mb-0 text-muted">
-      Qty: {{ item.quantity }}
-      | Price: {{ (item.price * item.quantity) | currency:'BGN' }}
-    </h5>
+    <div class="d-flex align-items-center ms-auto gap-2">
+      <div class="text-muted">
+        Qty: {{ item.quantity }}
+      </div>
+      <div class="fw-semibold text-success">
+        {{ (item.price * item.quantity) | currency:'BGN' }}
+      </div>
+    </div>
   </ng-template>
-
 </div>

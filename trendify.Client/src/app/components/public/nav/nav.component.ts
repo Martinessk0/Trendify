@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth-service';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CartService } from '../../../services/cart-service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
-  imports: [RouterLink, AsyncPipe,CommonModule],
+  imports: [RouterLink, AsyncPipe,CommonModule,RouterLinkActive],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',
 })

@@ -3,6 +3,8 @@
       <router-outlet></router-outlet>
     </main>
   
-    <app-footer-page></app-footer-page>
+    @if(!isAdmin){
+      <app-footer-page></app-footer-page>
+    }
   </div>
   

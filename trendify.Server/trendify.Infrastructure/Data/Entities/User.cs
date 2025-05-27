@@ -9,6 +9,8 @@ namespace trendify.Infrastructure.Data.Entities
         [Required]
         [StringLength(UserConstants.FirstNameMaxLength)]
         public string FullName { get; set; } = null!;
+
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
         //[Required]
         //[StringLength(UserConstants.LastNameMaxLength)]
         //public string LastName { get; set; } = null!;

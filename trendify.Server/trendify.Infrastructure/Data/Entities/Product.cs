@@ -49,5 +49,7 @@ namespace trendify.Infrastructure.Data.Entities
 
         [Required]
         public DateTime ModifiedAt { get; set; } = DateTime.Now;
+
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }

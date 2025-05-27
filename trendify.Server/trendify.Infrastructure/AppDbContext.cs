@@ -9,7 +9,7 @@ namespace trendify.Infrastructure
     public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
-            :base(options) { }
+            : base(options) { }
 
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ShoppingCartItem> CartItems { get; set; }
@@ -28,6 +28,12 @@ namespace trendify.Infrastructure
                    um.UserId,
                    um.OrderId
                });
+
+            builder.Entity<Review>()
+                .HasOne(r => r.User)
+                .WithMany(u => u.Reviews)
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());

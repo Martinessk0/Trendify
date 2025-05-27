@@ -69,7 +69,7 @@ export class CheckoutComponent implements OnInit {
           icon: 'success',
           title: 'Order Placed!',
           text: `Your order #${orderId} was successful.`,
-          confirmButtonText: 'Back to Cart'
+          confirmButtonText: 'Redirect To Orders'
         }).then(result => {
           if (result.isConfirmed) {
             this.cart.clearCart().subscribe(() => {

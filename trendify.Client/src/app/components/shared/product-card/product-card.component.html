@@ -29,7 +29,7 @@
       <i class="bi bi-cart-plus me-2"></i> Add to Cart
     </button>
     <div *ngIf="!isLoggedIn" class="text-muted small mt-2">
-      Please <a routerLink="/login">log in</a> to add to cart.
+      Please  <a [routerLink]="['/login']" [queryParams]="{ returnUrl: returnUrl }" class="text-decoration-underline">log in</a> to add to cart.
     </div>
   </div>
 </div>

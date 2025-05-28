@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProductModel } from '../../../models/product-model';
 import { CategoryModel } from '../../../models/category-model';
 import Swal from 'sweetalert2';
@@ -19,8 +19,15 @@ export class ProductCardComponent {
   @Input() product!: ProductModel;
   @Input() categories: CategoryModel[] = [];
 
-  constructor(private cartService: CartService, private auth: AuthService) {
+  constructor(private cartService: CartService,
+    private auth: AuthService,
+    public router: Router
+  ) {
 
+  }
+
+  get returnUrl(): string {
+    return this.router.url;
   }
 
   get isLoggedIn() {

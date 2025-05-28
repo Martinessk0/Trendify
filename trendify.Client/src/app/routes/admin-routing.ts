@@ -6,6 +6,7 @@ import { CategoriesComponent } from "../components/admin/categories/categories.c
 import { UsersComponent } from "../components/admin/users/users.component";
 import { OrderStatusesComponent } from "../components/admin/order-statuses/order-statuses.component";
 import { adminGuard } from "../guards/admin-guard";
+import { OrdersComponent } from "../components/admin/orders/orders.component";
 
 export const adminRoutes: Routes = [
   {
@@ -37,6 +38,10 @@ export const adminRoutes: Routes = [
       {
         path: 'order-statuses',
         component: OrderStatusesComponent,
+      },
+        {
+        path: 'orders',
+        component: OrdersComponent,
       }
     ],
   },

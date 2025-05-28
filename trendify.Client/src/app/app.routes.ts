@@ -4,5 +4,6 @@ import { adminRoutes } from './routes/admin-routing';
 
 export const routes: Routes = [
     ...publicRoutes,
-    ...adminRoutes
+    ...adminRoutes,
+    { path: '**', redirectTo: '' }
 ];

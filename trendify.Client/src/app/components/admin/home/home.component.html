@@ -1,59 +1,53 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-    <div class="col-md-9 mt-4 ms-sm-auto col-lg-10 px-md-4 offset-md-2 pt-5">
-      <div
-        class="d-flex mt-4 justify-content-between flex-wrap flex-md-nowrap align-items-center mb-4"
-      >
+    <main class="col-12 px-md-4 pt-5">
+      <div class="d-flex justify-content-between align-items-center flex-wrap mt-4 mb-4">
         <h1 class="h2">Dashboard</h1>
       </div>
 
-      <div class="row mb-4">
-        <div class="col-sm-6 col-lg-3 mb-3">
+      <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-lg-3">
           <app-dashboard-card
             title="Total Products"
             [value]="totalProducts"
             [isLoading]="isLoadingProducts"
-            bgClass="info"
-          ></app-dashboard-card>
+            bgClass="info">
+          </app-dashboard-card>
         </div>
-        <div class="col-sm-6 col-lg-3 mb-3">
+        <div class="col-sm-6 col-lg-3">
           <app-dashboard-card
             title="Total Orders"
             [value]="totalOrders"
             [isLoading]="isLoadingOrders"
-            bgClass="success"
-          ></app-dashboard-card>
+            bgClass="success">
+          </app-dashboard-card>
         </div>
-        <div class="col-sm-6 col-lg-3 mb-3">
+        <div class="col-sm-6 col-lg-3">
           <app-dashboard-card
             title="Revenue"
-            [value]="totalRevenue | currency : 'BGN'"
+            [value]="totalRevenue | currency:'BGN'"
             [isLoading]="isLoadingRevenue"
-            bgClass="warning"
-          ></app-dashboard-card>
+            bgClass="warning">
+          </app-dashboard-card>
         </div>
-        <div class="col-sm-6 col-lg-3 mb-3">
+        <div class="col-sm-6 col-lg-3">
           <app-dashboard-card
             title="Customers"
             [value]="totalCustomers"
             [isLoading]="isLoadingCustomers"
-            bgClass="danger"
-          ></app-dashboard-card>
-        </div>       
+            bgClass="danger">
+          </app-dashboard-card>
+        </div>
       </div>
 
       <div class="card">
         <div class="card-header">Recent Orders</div>
-        <div class="card-body table-responsive">
-          <app-recent-orders></app-recent-orders>
+        <div class="card-body">
+          <div class="table-responsive">
+            <app-recent-orders></app-recent-orders>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </div>
-
-<ng-template #loading>
-  <div class="spinner-border spinner-border-sm text-light" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</ng-template>

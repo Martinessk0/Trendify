@@ -32,7 +32,6 @@ export class ProductDetailsComponent implements OnInit {
     comment: '',
     reviewerName: ''
   };
-  isLoggedIn = false;
 
 
   constructor(
@@ -46,8 +45,13 @@ export class ProductDetailsComponent implements OnInit {
     this.cs.getAllCategories().subscribe((res) => (this.categories = res));
   }
 
+  
+  get isLoggedIn() {
+    return this.auth.isLoggedIn();
+  }
+
+
   ngOnInit(): void {
-    this.isLoggedIn = this.auth.isLoggedIn();
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (!id) {

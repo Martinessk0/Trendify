@@ -6,6 +6,7 @@ import { ProductModel } from '../../../models/product-model';
 import { CategoryModel } from '../../../models/category-model';
 import Swal from 'sweetalert2';
 import { CartService } from '../../../services/cart-service';
+import { AuthService } from '../../../services/auth-service';
 
 @Component({
   selector: 'app-product-card',
@@ -18,17 +19,21 @@ export class ProductCardComponent {
   @Input() product!: ProductModel;
   @Input() categories: CategoryModel[] = [];
 
-  constructor(private cartService: CartService){
+  constructor(private cartService: CartService, private auth: AuthService) {
 
   }
 
-   addToCart(): void {
+  get isLoggedIn() {
+    return this.auth.isLoggedIn();
+  }
+
+  addToCart(): void {
     if (!this.product) {
       Swal.fire('Error', 'Invalid product.', 'error');
       return;
     }
 
-    this.cartService.addItem({productId: +this.product.id,quantity: 1}).subscribe({
+    this.cartService.addItem({ productId: +this.product.id, quantity: 1 }).subscribe({
       next: () => {
         Swal.fire({
           title: 'Added to Cart!',

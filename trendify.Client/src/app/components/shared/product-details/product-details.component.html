@@ -7,21 +7,14 @@
   <ng-container *ngIf="product; else errorTpl">
     <div class="card product-card border-2 rounded-4 shadow-lg">
       <div class="row g-0 align-items-center">
-        <!-- Image -->
         <div class="col-md-5 text-center p-4">
-          <img
-            [src]="product.imageUrl"
-            [alt]="product.name"
-            class="img-fluid rounded"
-            style="max-height: 300px; object-fit: contain"
-          />
+          <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid rounded"
+            style="max-height: 300px; object-fit: contain" />
         </div>
 
-        <!-- Details -->
         <div class="col-md-7 p-4">
           <h2 class="fw-bold text-uppercase mb-2">{{ product.name }}</h2>
 
-          <!-- Category -->
           <p class="text-muted mb-1" *ngFor="let cat of categories">
             <ng-container *ngIf="cat.id === product.categoryId">
               <strong>Category:</strong> {{ cat.name }}
@@ -34,23 +27,25 @@
           <strong>Description:</strong>
           <p>{{ product.description }}</p>
 
-          <!-- Action -->
-          <button class="btn btn-lg btn-primary px-4" (click)="addToCart()">
+          <button *ngIf="isLoggedIn" class="btn btn-lg btn-primary px-4" (click)="addToCart()">
             <i class="bi bi-cart-plus me-2"></i> Add to Cart
           </button>
+
+          <div *ngIf="!isLoggedIn" class="text-muted mt-2">
+            <a routerLink="/login" class="text-decoration-underline">Log in</a> to add to cart.
+          </div>
         </div>
       </div>
     </div>
 
     <hr class="my-4" />
 
-    <!-- Секция за ревюта -->
     <div *ngIf="reviews.length; else noReviewsTpl">
       <div class="p-4 rounded-3 mb-5">
         <h4 class="mb-4">
           Ревюта <span class="badge bg-primary">{{ reviews.length }}</span>
         </h4>
-      
+
         <div class="row g-2">
           <div class="col-12" *ngFor="let r of reviews">
             <app-review-card [review]="r"></app-review-card>
@@ -65,27 +60,15 @@
 
     <hr class="my-4" />
 
-    <!-- Формата за изпращане на ново ревю -->
     <h5>Напиши ревю</h5>
     <form (ngSubmit)="submitReview()" class="mb-5">
       <div *ngIf="!isLoggedIn" class="mb-3">
         <label class="form-label">Ваше име</label>
-        <input
-          [(ngModel)]="reviewDto.reviewerName"
-          name="reviewerName"
-          class="form-control"
-          required
-        />
+        <input [(ngModel)]="reviewDto.reviewerName" name="reviewerName" class="form-control" required />
       </div>
       <div class="mb-3">
         <label class="form-label">Коментар</label>
-        <textarea
-          [(ngModel)]="reviewDto.comment"
-          name="comment"
-          rows="3"
-          class="form-control"
-          required
-        ></textarea>
+        <textarea [(ngModel)]="reviewDto.comment" name="comment" rows="3" class="form-control" required></textarea>
       </div>
       <button type="submit" class="btn btn-success">Изпрати</button>
     </form>

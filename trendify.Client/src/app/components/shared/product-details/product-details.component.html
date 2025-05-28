@@ -32,7 +32,10 @@
           </button>
 
           <div *ngIf="!isLoggedIn" class="text-muted mt-2">
-            <a routerLink="/login" class="text-decoration-underline">Log in</a> to add to cart.
+            <a [routerLink]="['/login']" [queryParams]="{ returnUrl: returnUrl }" class="text-decoration-underline">
+              Log in
+            </a>
+            to add to cart.
           </div>
         </div>
       </div>

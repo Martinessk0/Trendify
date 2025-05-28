@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from '../../../models/product-model';
 import { ProductService } from '../../../services/product-service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../services/cart-service';
 import Swal from 'sweetalert2';
@@ -40,12 +40,16 @@ export class ProductDetailsComponent implements OnInit {
     private cartService: CartService,
     private cs: CategoryService,
     private reviewService: ReviewService,
-    private auth: AuthService
+    private auth: AuthService,
+    public router: Router
   ) {
     this.cs.getAllCategories().subscribe((res) => (this.categories = res));
   }
 
-  
+    get returnUrl(): string {
+    return this.router.url;
+  }
+
   get isLoggedIn() {
     return this.auth.isLoggedIn();
   }

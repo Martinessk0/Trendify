@@ -140,7 +140,7 @@ namespace trendify.Core.Services
                                 .Include(c => c.CartProducts)
                                 .FirstOrDefaultAsync(c => c.BuyerId == userId && c.IsActive);
 
-            if (cart == null) return -1;
+            if (cart == null) return 0;
 
             return cart.CartProducts.Count();
         }

@@ -15,7 +15,9 @@
       alt="{{ item.productName }}"
     />
     <div class="ms-3">
-      <h5 class="mb-1">{{ item.productName }}</h5>
+      <h5 class="card-title mb-1" [routerLink]="['/product/details', item.productId]" style="cursor: pointer;">{{ item.productName
+      }}</h5>
+      <!-- <h5 class="mb-1">{{ item.productName }}</h5> -->
       <small class="text-muted">{{ item.price | currency:'BGN' }}</small>
     </div>
   </div>

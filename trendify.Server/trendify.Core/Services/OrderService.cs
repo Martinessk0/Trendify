@@ -161,6 +161,21 @@ namespace trendify.Core.Services
             return await repo.AllReadonly<Order>().CountAsync();
         }
 
-       
+
+        public async Task UpdateOrderStatusAsync(int orderId, int newStatusId)
+        {
+            var order = await repo.GetByIdAsync<Order>(orderId)
+                        ?? throw new KeyNotFoundException($"Order with ID {orderId} not found.");
+
+            var statusExists = await repo.AllReadonly<OrderStatus>()
+                                         .AnyAsync(s => s.Id == newStatusId);
+            if (!statusExists)
+                throw new KeyNotFoundException($"OrderStatus with ID {newStatusId} not found.");
+
+            order.OrderStatusId = newStatusId;
+            repo.Update(order);
+            await repo.SaveChangesAsync();
+        }
+
     }
 }

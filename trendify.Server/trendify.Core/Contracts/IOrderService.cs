@@ -10,5 +10,7 @@ namespace trendify.Core.Contracts
         Task<List<OrderSummaryModel>> GetRecentOrdersByUserAsync(int count);
         Task<decimal> TotalRevenue();
         Task<int> TotalOrders();
+
+        Task UpdateOrderStatusAsync(int orderId, int newStatusId);
     }
 }

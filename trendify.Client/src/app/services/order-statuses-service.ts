@@ -17,10 +17,7 @@ export class OrderStatusesService {
   createStatus(product: OrderStatusesModel): Observable<OrderStatusesModel> {
      return this.http.post<OrderStatusesModel>(`${this.apiUrl}/orderStatus`, product);
    }
- 
-   updateStatus(id: number, product: OrderStatusesModel): Observable<OrderStatusesModel> {
-     return this.http.put<OrderStatusesModel>(`${this.apiUrl}/orderStatus/${id}`, product);
-   }
+
  
    deleteStatus(id: number): Observable<void> {
      return this.http.delete<void>(`${this.apiUrl}/orderStatus/${id}`);

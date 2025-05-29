@@ -5,8 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { CategoryModel } from '../../../models/category-model';
-import { CategoryService } from '../../../services/category-service';
 import { UserService } from '../../../services/user-service';
 import { ProfileModel } from '../../../models/account/profile-model';
 

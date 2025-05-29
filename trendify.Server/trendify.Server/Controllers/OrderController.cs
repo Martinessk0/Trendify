@@ -64,6 +64,15 @@ namespace trendify.Server.Controllers
         {
             return await _orderService.TotalOrders();
         }
+
+        [HttpPatch("{id}/status")]
+        public async Task<IActionResult> UpdateStatus(
+          int id,
+          [FromBody] UpdateOrderStatusModel dto)
+        {
+            await _orderService.UpdateOrderStatusAsync(id, dto.NewStatusId);
+            return NoContent();
+        }
     }
 
 }

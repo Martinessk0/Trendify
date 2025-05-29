@@ -56,7 +56,6 @@ export class OrdersComponent implements OnInit, AfterViewInit {
       this.dialog.open<OrderDetailsDialogComponent, OrderDetailsModel>(
         OrderDetailsDialogComponent,
         {
-          width: '600px',
           data: orderDetails,
           disableClose: true
         }
@@ -65,13 +64,10 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   }
 
    edit(orderId: number, currentStatusName: string) {
-    // 1) load all statuses
     this.statusesService.getAllStatuses().subscribe(statuses => {
-      // 2) find the matching ID for the string you have
       const currentStatus = statuses.find(s => s.name === currentStatusName);
       const currentStatusId = currentStatus ? currentStatus.id : statuses[0]?.id;
 
-      // 3) open the dialog
       const dialogRef = this.dialog.open<
         OrderStatusDialogComponent,
         OrderStatusDialogData,
@@ -81,13 +77,11 @@ export class OrdersComponent implements OnInit, AfterViewInit {
         data: { orderId, currentStatusId, statuses }
       });
 
-      // 4) when it closes, patch and update the row
       dialogRef.afterClosed().subscribe((newStatusId: number | undefined) => {
         if (newStatusId != null) {
           this.orderService.updateOrderStatus(orderId, { newStatusId })
             .subscribe({
               next: () => {
-                // replace the row’s status string with the new one
                 const newName = statuses.find(s => s.id === newStatusId)?.name;
                 this.dataSource.data = this.dataSource.data.map(o =>
                   o.id === orderId && newName

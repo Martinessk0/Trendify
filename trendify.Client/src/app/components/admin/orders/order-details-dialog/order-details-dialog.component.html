@@ -1,23 +1,65 @@
- <h2 mat-dialog-title>Order {{data.orderNumber}}</h2>
-    <mat-dialog-content>
-      <p><strong>Date:</strong> {{data.orderDate | date:'dd.MM.yyyy HH:mm'}}</p>
-      <p><strong>Status:</strong> {{data.status}}</p>
-      <p><strong>Total:</strong> {{data.total | currency:'BGN'}}</p>
-      <h3>Delivery Address</h3>
-      <p>{{data.address.name}}</p>
-      <p>{{data.address.streetAddress}}, {{data.address.zipCode}} {{data.address.city}}</p>
-      <h3>Items</h3>
-      <table class="w-100">
-        <tr>
-          <th>Product</th><th>Qty</th><th>Price</th>
-        </tr>
-        <tr *ngFor="let item of data.items">
-          <td>{{item.productName}}</td>
-          <td>{{item.quantity}}</td>
-          <td>{{item.price | currency:'BGN'}}</td>
-        </tr>
-      </table>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button (click)="close()">Close</button>
-    </mat-dialog-actions>
+<div class="bg-white rounded shadow-sm p-4" style="max-width: 500px;">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h4 class="mb-0">
+        <i class="bi bi-receipt-cutoff me-2"></i>
+        Order {{ data.orderNumber }}
+      </h4>
+      <small class="text-muted">{{ data.orderDate | date:'dd.MM.yyyy HH:mm' }}</small>
+    </div>
+    <span 
+      class="badge"
+      [ngClass]="{
+        'bg-warning text-dark': data.status==='Pending',
+        'bg-info': data.status==='In Progress',
+        'bg-success': data.status==='Completed',
+        'bg-danger': data.status==='Cancelled'
+      }"
+    >
+      {{ data.status }}
+    </span>
+  </div>
+
+  <!-- Summary + Address -->
+  <div class="row mb-4">
+    <div class="col-6">
+      <div class="mb-2 text-uppercase text-muted small">Total</div>
+      <div class="fw-bold">{{ data.total | currency:'BGN' }}</div>
+    </div>
+    <div class="col-6">
+      <div class="mb-2 text-uppercase text-muted small">Deliver To</div>
+      <div>
+        {{ data.address.name }}<br>
+        {{ data.address.streetAddress }}<br>
+        {{ data.address.zipCode }} {{ data.address.city }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Items List -->
+  <h5 class="mb-3">
+    <i class="bi bi-bag-fill me-1 text-primary"></i>
+    Items ({{ data.items.length }})
+  </h5>
+  <ul class="list-group list-group-flush mb-4">
+    <li 
+      *ngFor="let item of data.items" 
+      class="list-group-item d-flex justify-content-between align-items-center"
+    >
+      <div>
+        <strong>{{ item.productName }}</strong><br>
+        <small class="text-muted">Qty: {{ item.quantity }}</small>
+      </div>
+      <span class="fw-semibold">{{ item.price | currency:'BGN' }}</span>
+    </li>
+  </ul>
+
+  <!-- Footer -->
+  <div class="text-end">
+    <button class="btn btn-outline-secondary" (click)="close()">
+      <i class="bi bi-x-circle me-1"></i> Close
+    </button>
+  </div>
+</div>

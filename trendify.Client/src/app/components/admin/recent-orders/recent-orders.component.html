@@ -8,7 +8,6 @@
     </tr>
   </thead>
   <tbody>
-    <!-- loading state -->
     <tr *ngIf="isLoadingRecent">
       <td colspan="5" class="text-center py-4">
         <div class="spinner-border" role="status">
@@ -17,12 +16,10 @@
       </td>
     </tr>
   
-    <!-- no orders -->
     <tr *ngIf="!isLoadingRecent && recentOrders.length === 0">
       <td colspan="5" class="text-center">Няма поръчки</td>
     </tr>
   
-    <!-- recent orders -->
     <tr *ngFor="let o of recentOrders">
       <td>#{{ o.orderNumber }}</td>
       <td>{{ o.orderDate | date:'yyyy-MM-dd' }}</td>

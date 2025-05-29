@@ -1,6 +1,5 @@
 <mat-dialog-content>
   <div class="container-fluid">
-    <!-- Header -->
     <div class="row mb-3">
       <div class="col">
         <h4 class="modal-title">{{ data.title }}</h4>
@@ -9,18 +8,15 @@
 
     <form [formGroup]="form">
       <div class="row">
-        <!-- Left column -->
         <div class="col-md-6 mb-3">
           <div class="card h-100">
             <div class="card-body">
 
-              <!-- Name -->
               <div class="form-group mb-3">
                 <label for="name"><i class="bi bi-pencil"></i> Name</label>
                 <input id="name" type="text" class="form-control" formControlName="name" placeholder="Product name" />
               </div>
 
-              <!-- Category -->
               <div class="form-group mb-3">
                 <label for="category"><i class="bi bi-tags"></i> Category</label>
                 <select id="category" class="form-select" formControlName="categoryId">
@@ -30,13 +26,11 @@
                 </select>
               </div>
 
-              <!-- Price -->
               <div class="form-group mb-3">
                 <label for="price"> <i class="bi bi-cash"></i> Price (BGN)</label>
                 <input id="price" type="number" class="form-control" formControlName="price" placeholder="0.00" />
               </div>
 
-              <!-- Image URL -->
               <div class="form-group mb-0">
                 <label for="imageUrl"><i class="bi bi-image"></i> Image URL</label>
                 <input id="imageUrl" type="url" class="form-control" formControlName="imageUrl"
@@ -47,11 +41,9 @@
           </div>
         </div>
 
-        <!-- Right column -->
         <div class="col-md-6 mb-3">
           <div class="card h-100">
             <div class="card-body">
-              <!-- Description -->
               <div class="form-group mb-0">
                 <label for="description"><i class="bi bi-file-text"></i> Full Description</label>
                 <textarea id="description" rows="10" class="form-control" formControlName="description"></textarea>
@@ -62,7 +54,6 @@
       </div>
 
 
-      <!-- Toggles -->
       <div class="row mb-3">
         <div class="col d-flex flex-wrap">
           <div class="form-check me-3">

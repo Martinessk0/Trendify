@@ -67,22 +67,16 @@ export class OrdersComponent implements OnInit, AfterViewInit {
       width: '400px'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result?.status && result.status !== order.status) {
-        this.orderService
-          .updateStatus(order.orderNumber, result.status)
-          .subscribe(updatedOrder => {
-            order.status = updatedOrder.status;
-            this.dataSource._updateChangeSubscription();
-          });
-      }
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result?.status && result.status !== order.status) {
+    //     this.orderService
+    //       .updateStatus(order.orderNumber, result.status)
+    //       .subscribe(updatedOrder => {
+    //         order.status = updatedOrder.status;
+    //         this.dataSource._updateChangeSubscription();
+    //       });
+    //   }
+    // });
   }
 
-  delete(orderNumber: string) {
-    this.orderService.delete(orderNumber).subscribe(() => {
-      this.dataSource.data = this.dataSource.data.filter(o => o.orderNumber !== orderNumber);
-      this.dataSource._updateChangeSubscription();
-    });
-  }
 }

@@ -6,13 +6,14 @@ import { finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RecentOrdersComponent } from "../recent-orders/recent-orders.component";
 import { DashboardCardComponent } from "../../shared/dashboard-card/dashboard-card.component";
+import { RouterLink } from '@angular/router';
 
 /**
  * @title Table with pagination
  */
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RecentOrdersComponent, DashboardCardComponent],
+  imports: [CommonModule, RecentOrdersComponent, DashboardCardComponent,RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

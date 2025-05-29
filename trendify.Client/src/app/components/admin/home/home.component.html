@@ -7,41 +7,34 @@
 
       <div class="row g-3 mb-4">
         <div class="col-sm-6 col-lg-3">
-          <app-dashboard-card
-            title="Total Products"
-            [value]="totalProducts"
-            [isLoading]="isLoadingProducts"
+          <app-dashboard-card title="Total Products" [value]="totalProducts" [isLoading]="isLoadingProducts"
             bgClass="info">
           </app-dashboard-card>
         </div>
         <div class="col-sm-6 col-lg-3">
-          <app-dashboard-card
-            title="Total Orders"
-            [value]="totalOrders"
-            [isLoading]="isLoadingOrders"
+          <app-dashboard-card title="Total Orders" [value]="totalOrders" [isLoading]="isLoadingOrders"
             bgClass="success">
           </app-dashboard-card>
         </div>
         <div class="col-sm-6 col-lg-3">
-          <app-dashboard-card
-            title="Revenue"
-            [value]="totalRevenue | currency:'BGN'"
-            [isLoading]="isLoadingRevenue"
+          <app-dashboard-card title="Revenue" [value]="totalRevenue | currency:'BGN'" [isLoading]="isLoadingRevenue"
             bgClass="warning">
           </app-dashboard-card>
         </div>
         <div class="col-sm-6 col-lg-3">
-          <app-dashboard-card
-            title="Customers"
-            [value]="totalCustomers"
-            [isLoading]="isLoadingCustomers"
+          <app-dashboard-card title="Customers" [value]="totalCustomers" [isLoading]="isLoadingCustomers"
             bgClass="danger">
           </app-dashboard-card>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-header">Recent Orders</div>
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Recent Orders</h5>
+          <a  [routerLink]="['/admin/orders']" class="btn btn-sm btn-primary" title="View all orders">
+            All Orders
+          </a>
+        </div>
         <div class="card-body">
           <div class="table-responsive">
             <app-recent-orders></app-recent-orders>

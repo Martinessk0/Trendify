@@ -35,4 +35,12 @@ export class OrderService {
   getTotalCount() {
     return this.http.get<number>(`${this.api}/totalCount`)
   }
+
+  // updateOrderStatus(id: number) {
+  //   return this.http.get<number>(`${this.api}/${id}/status`)
+  // }
+
+  updateOrderStatus(id: number, dto: { newStatusId: number }) {
+  return this.http.patch<void>(`${this.api}/${id}/status`, dto);
+}
 }

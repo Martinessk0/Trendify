@@ -48,10 +48,10 @@
                 </th>
                 <td class="w-36" mat-cell *matCellDef="let row">
                   <div>
-                    <button mat-icon-button color="primary">
+                    <button mat-icon-button color="primary" (click)="show(row.id)">
                       <mat-icon>visibility</mat-icon>
                     </button>
-                    <button mat-icon-button color="primary">
+                    <button mat-icon-button color="primary" (click)="edit(row.id, row.status)">
                       <mat-icon>edit</mat-icon>
                     </button>
                   </div>

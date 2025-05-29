@@ -10,6 +10,9 @@ import { OrderService } from '../../../services/order-service';
 import { CommonModule, NgClass } from '@angular/common';
 import { OrderStatusDialogComponent, OrderStatusDialogData } from './order-status-dialog/order-status-dialog.component';
 import { OrderStatusesService } from '../../../services/order-statuses-service';
+import Swal from 'sweetalert2';
+import { OrderDetailsModel } from '../../../models/order/order-details-model';
+import { OrderDetailsDialogComponent } from './order-details-dialog/order-details-dialog.component';
 
 
 @Component({
@@ -33,6 +36,7 @@ export class OrdersComponent implements OnInit, AfterViewInit {
 
   constructor(
     private orderService: OrderService,
+    private statusesService: OrderStatusesService,
     public dialog: MatDialog
   ) { }
 
@@ -46,37 +50,60 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  view(order: OrderSummaryModel) {
-    this.dialog.open<OrderStatusDialogComponent, OrderStatusDialogData>(
-      OrderStatusDialogComponent,
-      {
-        data: { order, mode: 'view' },
-        disableClose: true,
-        width: '400px'
-      }
-    );
+  show(orderId: number) {
+    // first load the full order
+    this.orderService.getById(orderId).subscribe(orderDetails => {
+      this.dialog.open<OrderDetailsDialogComponent, OrderDetailsModel>(
+        OrderDetailsDialogComponent,
+        {
+          width: '600px',
+          data: orderDetails,
+          disableClose: true
+        }
+      );
+    });
   }
 
-  edit(order: OrderSummaryModel) {
-    const dialogRef = this.dialog.open<
-      OrderStatusDialogComponent,
-      OrderStatusDialogData,
-      { status: string }
-    >(OrderStatusDialogComponent, {
-      data: { order, mode: 'edit' },
-      width: '400px'
-    });
+   edit(orderId: number, currentStatusName: string) {
+    // 1) load all statuses
+    this.statusesService.getAllStatuses().subscribe(statuses => {
+      // 2) find the matching ID for the string you have
+      const currentStatus = statuses.find(s => s.name === currentStatusName);
+      const currentStatusId = currentStatus ? currentStatus.id : statuses[0]?.id;
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result?.status && result.status !== order.status) {
-    //     this.orderService
-    //       .updateStatus(order.orderNumber, result.status)
-    //       .subscribe(updatedOrder => {
-    //         order.status = updatedOrder.status;
-    //         this.dataSource._updateChangeSubscription();
-    //       });
-    //   }
-    // });
+      // 3) open the dialog
+      const dialogRef = this.dialog.open<
+        OrderStatusDialogComponent,
+        OrderStatusDialogData,
+        number
+      >(OrderStatusDialogComponent, {
+        width: '400px',
+        data: { orderId, currentStatusId, statuses }
+      });
+
+      // 4) when it closes, patch and update the row
+      dialogRef.afterClosed().subscribe((newStatusId: number | undefined) => {
+        if (newStatusId != null) {
+          this.orderService.updateOrderStatus(orderId, { newStatusId })
+            .subscribe({
+              next: () => {
+                // replace the row’s status string with the new one
+                const newName = statuses.find(s => s.id === newStatusId)?.name;
+                this.dataSource.data = this.dataSource.data.map(o =>
+                  o.id === orderId && newName
+                    ? { ...o, status: newName }
+                    : o
+                );
+                this.dataSource._updateChangeSubscription();
+                Swal.fire('Updated', 'Order status has been updated.', 'success');
+              },
+              error: err => {
+                Swal.fire('Error', err.error?.message || 'Could not update status.', 'error');
+              }
+            });
+        }
+      });
+    });
   }
 
 }

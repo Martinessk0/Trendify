@@ -1,0 +1,23 @@
+ <h2 mat-dialog-title>Order {{data.orderNumber}}</h2>
+    <mat-dialog-content>
+      <p><strong>Date:</strong> {{data.orderDate | date:'dd.MM.yyyy HH:mm'}}</p>
+      <p><strong>Status:</strong> {{data.status}}</p>
+      <p><strong>Total:</strong> {{data.total | currency:'BGN'}}</p>
+      <h3>Delivery Address</h3>
+      <p>{{data.address.name}}</p>
+      <p>{{data.address.streetAddress}}, {{data.address.zipCode}} {{data.address.city}}</p>
+      <h3>Items</h3>
+      <table class="w-100">
+        <tr>
+          <th>Product</th><th>Qty</th><th>Price</th>
+        </tr>
+        <tr *ngFor="let item of data.items">
+          <td>{{item.productName}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.price | currency:'BGN'}}</td>
+        </tr>
+      </table>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="close()">Close</button>
+    </mat-dialog-actions>
